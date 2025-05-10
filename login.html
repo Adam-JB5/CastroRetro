@@ -10,20 +10,23 @@
 <body class="text-center">
     <div id="login-screen" class="h-screen w-screen flex items-center justify-center">
         <div id="login-content" class="h-3/4 w-3/5 flex flex-col items-center justify-between">
+            
             <div id="login-title">
                 <h1 class="text-8xl text-white">CASTRO RETRO</h1>
             </div>
+
             <div id="login-sign-up-link" class="my-4">
                 <a href="./register.html" class="text-gray-400 underline hover:text-white"><p>¿No tienes una cuenta? Regístrate aquí</p></a>
             </div>
-            <div id="login-form" class="w-2/3 h-full flex flex-col items-center pt-7 rounded-2xl">
+
+            <form id="login-form" class="w-2/3 h-full flex flex-col items-center pt-7 rounded-2xl">
                 <input class="w-3/4 h-20 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-3xl rounded-lg mt-10 mb-36 px-4" id="login-email" type="email" placeholder="Email">
                 <input class="w-3/4 h-20 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-3xl rounded-lg px-4" id="login-password" type="password" placeholder="Contraseña">
 
                 <div class="flex-grow"></div>
 
-                <button id="login-submit-button" class="h-20 bg-black w-full text-white text-3xl font-bold rounded-b-2xl hover:text-black">INICIAR SESIÓN</button>
-            </div>
+                <input id="login-submit-button" type="submit" value="INICIAR SESIÓN" class="h-20 bg-black w-full text-white text-3xl font-bold rounded-b-2xl hover:text-black">
+            </form>
         </div>
     </div>
 </body>

@@ -10,17 +10,21 @@
 <body class="text-center">
     <div id="register-screen" class="h-screen w-screen flex items-center justify-center">
         <div id="register-content" class="h-3/4 w-3/5 flex flex-col items-center justify-between">
+            
             <div id="register-title">
                 <h1 class="text-8xl text-white">CASTRO RETRO</h1>
             </div>
-            <div id="register-form" class="w-2/3 h-full flex flex-col items-center pt-7 rounded-2xl">
+
+            <form id="register-form" class="w-2/3 h-full flex flex-col items-center pt-7 rounded-2xl">
                 <input class="w-3/4 h-20 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-3xl rounded-lg px-4 mb-16 mt-10" id="register-email" type="email" placeholder="Email">
                 <input class="w-3/4 h-20 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-3xl rounded-lg px-4 mb-16" id="register-password" type="password" placeholder="Contraseña">
                 <input class="w-3/4 h-20 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-3xl rounded-lg px-4 mb-16" id="register-username" type="text" placeholder="Nombre de usuario">
+                
                 <div class="flex-grow"></div>
 
-                <button id="register-submit-button" class="h-20 bg-black w-full text-white text-3xl font-bold rounded-b-2xl hover:text-black">REGISTRARSE</button>
-            </div>
+                <input id="register-submit-button" type="submit" value="REGISTRARSE" class="h-20 bg-black w-full text-white text-3xl font-bold rounded-b-2xl hover:text-black">
+            </form>
+            
         </div>
     </div>
 </body>
