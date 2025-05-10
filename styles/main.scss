@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './login';
+@import './register';
+@import './typography';
+
+
+
+@font-face {
+    font-family: 'Retronoid';
+    src: url(../assets/fonts/Retronoid.woff2);
+}
+
+@font-face {
+    font-family: 'Retronoid-Bold';
+    src: url(../assets/fonts/RetronoidBold.woff2);
+}
+
+@font-face {
+    font-family: 'Montserrat-Thin';
+    src: url(../assets/fonts/MontserratThin.woff2);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(../assets/fonts/MontserratRegular.woff2);
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url(../assets/fonts/MontserratBold.woff2);
+}
+
+/* From top left to bottom right */
+@keyframes moverFondo {
+    50% {
+        background-position: 2000px 2000px;
+    }
+
+    100% {
+        background-position: -2000px -2000px;
+    }
+}
+
+/* From bottom right to top left */
+@keyframes moverFondo2 {
+    50% {
+        background-position: -2000px -2000px;
+    }
+
+    100% {
+        background-position: 2000px 2000px;
+    }
+}

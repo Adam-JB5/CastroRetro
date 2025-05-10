@@ -1,0 +1,63 @@
+@import './typography';
+
+#register-screen {
+    background: 
+        url(../assets/images/FondoPatron_4000x4000.png) repeat,
+        #1B1D36;
+    animation: moverFondo2 1250s linear infinite;
+    background-position: 50% 50%;
+    background-blend-mode: soft-light;
+}
+
+#register-content {
+
+}
+
+
+#register-title {
+    h1 {
+        font-family: $retronoid-bold;
+        margin-bottom: 1rem;
+    }
+}
+
+#register-form {
+    background-color: #282c63d1;
+
+    input {
+        font-family: $montserrat-normal;
+    }
+
+    button {
+        font-family: $montserrat-normal;
+        transition: all 0.6s;
+        clip-path: polygon(
+        0% 0%,
+        5% 4%,
+        10% 8%,
+        15% 10%,
+        20% 12%,
+        25% 13.5%,
+        30% 14.5%,
+        35% 15.5%,
+        40% 16%,
+        45% 16.5%,
+        50% 17%,
+        55% 16.5%,
+        60% 16%,
+        65% 15.5%,
+        70% 14.5%,
+        75% 13.5%,
+        80% 12%,
+        85% 10%,
+        90% 8%,
+        95% 4%,
+        100% 0%,
+        100% 100%,
+        0% 100%
+    );
+    }
+    button:hover {
+        background-color: #FFB8DE;
+    }
+}
