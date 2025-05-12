@@ -1,6 +1,10 @@
+console.log("register.js cargado");
+
 export default function register() {
     const formulario = document.getElementById("register-form");
-
+    console.log("antes");
+console.log(formulario);
+console.log("despues");
     formulario.addEventListener("submit", (event) => {
         event.preventDefault(); // Evita que se recargue la página
 
