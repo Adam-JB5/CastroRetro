@@ -2,10 +2,10 @@
   "name": "castro-retro",
   "version": "1.0.0",
   "scripts": {
-  "build:css": "concurrently \"sass --watch ./styles/main.scss:./styles/compiled.css\" \"tailwindcss -i ./styles/compiled.css -o ./styles/output.css --watch\"",
-  "build": "sass ./styles/main.scss ./styles/compiled.css && tailwindcss -i ./styles/compiled.css -o ./styles/output.css",
-  "copy": "xcopy /E /Y /I assets dist\\assets && xcopy /E /Y /I js dist\\js && xcopy /Y *.html dist\\ && copy styles\\output.css dist\\styles.css"
-},
+    "build:css": "tailwindcss -i ./styles/input.css -o ./styles/output.css --watch",
+    "build": "sass ./styles/main.scss ./styles/compiled.css && tailwindcss -i ./styles/compiled.css -o ./styles/output.css",
+    "copy": "xcopy /E /Y /I assets dist\\assets && xcopy /E /Y /I js dist\\js && xcopy /Y *.html dist\\ && copy styles\\output.css dist\\styles.css"
+  },
   "devDependencies": {
     "concurrently": "^9.1.2",
     "sass": "^1.87.0",

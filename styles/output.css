@@ -974,91 +974,32 @@ video {
   transition-duration: 150ms;
 }
 
-#login-screen {
-  background: url(../assets/images/FondoPatron_4000x4000.png) repeat, #1B1D36;
-  animation: moverFondo 1250s linear infinite;
-  background-position: 50% 50%;
-  background-blend-mode: soft-light;
-}
-
-#login-title h1 {
-  font-family: "Retronoid-Bold", sans-serif;
-}
-
-#login-form {
-  background-color: rgba(40, 44, 99, 0.8196078431);
-}
-
-#login-form input {
-  font-family: "Montserrat", sans-serif;
-}
-
-#login-form input[type=submit] {
-  font-family: "Montserrat", sans-serif;
-  transition: all 0.6s;
-  clip-path: polygon(0% 0%, 5% 4%, 10% 8%, 15% 10%, 20% 12%, 25% 13.5%, 30% 14.5%, 35% 15.5%, 40% 16%, 45% 16.5%, 50% 17%, 55% 16.5%, 60% 16%, 65% 15.5%, 70% 14.5%, 75% 13.5%, 80% 12%, 85% 10%, 90% 8%, 95% 4%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-#login-form input[type=submit]:hover {
-  background-color: #FFB8DE;
-}
-
-#register-screen {
-  background: url(../assets/images/FondoPatron_4000x4000.png) repeat, #1B1D36;
-  animation: moverFondo2 1250s linear infinite;
-  background-position: 50% 50%;
-  background-blend-mode: soft-light;
-}
-
-#register-title h1 {
-  font-family: "Retronoid-Bold", sans-serif;
-  margin-bottom: 1rem;
-}
-
-#register-form {
-  background-color: rgba(40, 44, 99, 0.8196078431);
-}
-
-#register-form input {
-  font-family: "Montserrat", sans-serif;
-}
-
-#register-form input[type=submit] {
-  font-family: "Montserrat", sans-serif;
-  transition: all 0.6s;
-  clip-path: polygon(0% 0%, 5% 4%, 10% 8%, 15% 10%, 20% 12%, 25% 13.5%, 30% 14.5%, 35% 15.5%, 40% 16%, 45% 16.5%, 50% 17%, 55% 16.5%, 60% 16%, 65% 15.5%, 70% 14.5%, 75% 13.5%, 80% 12%, 85% 10%, 90% 8%, 95% 4%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-#register-form input[type=submit]:hover {
-  background-color: #FFB8DE;
-}
-
 @font-face {
-  font-family: "Retronoid";
+  font-family: 'Retronoid';
 
   src: url(../assets/fonts/Retronoid.woff2);
 }
 
 @font-face {
-  font-family: "Retronoid-Bold";
+  font-family: 'Retronoid-Bold';
 
   src: url(../assets/fonts/RetronoidBold.woff2);
 }
 
 @font-face {
-  font-family: "Montserrat-Thin";
+  font-family: 'Montserrat-Thin';
 
   src: url(../assets/fonts/MontserratThin.woff2);
 }
 
 @font-face {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
 
   src: url(../assets/fonts/MontserratRegular.woff2);
 }
 
 @font-face {
-  font-family: "Montserrat-Bold";
+  font-family: 'Montserrat-Bold';
 
   src: url(../assets/fonts/MontserratBold.woff2);
 }
@@ -1140,5 +1081,3 @@ video {
     flex-direction: row;
   }
 }
-
-/*# sourceMappingURL=output.css.map */
