@@ -1,0 +1,50 @@
+/* No se puede usar @import './typography'; en CSS si es SCSS. 
+   Asegúrese de tener @font-face en este archivo o en uno ya cargado. */
+
+/* Suponiendo que las fuentes están definidas así: */
+@font-face {
+    font-family: 'Retronoid-Bold';
+    src: url("../assets/fonts/RetronoidBold.woff2");
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("../assets/fonts/MontserratRegular.woff2");
+}
+
+#register-screen {
+    background: 
+        url(../assets/images/FondoPatron_4000x4000.png) repeat,
+        #1B1D36;
+    animation: moverFondo2 1250s linear infinite;
+    background-position: 50% 50%;
+    background-blend-mode: soft-light;
+}
+
+#register-title h1 {
+    font-family: 'Retronoid-Bold';
+    margin-bottom: 1rem;
+}
+
+#register-form {
+    background-color: #282c63d1;
+}
+
+#register-form input {
+    font-family: 'Montserrat';
+}
+
+#register-form input[type="submit"] {
+    font-family: 'Montserrat';
+    transition: all 0.6s;
+    clip-path: polygon(
+        0% 0%, 5% 4%, 10% 8%, 15% 10%, 20% 12%, 25% 13.5%, 30% 14.5%,
+        35% 15.5%, 40% 16%, 45% 16.5%, 50% 17%, 55% 16.5%, 60% 16%,
+        65% 15.5%, 70% 14.5%, 75% 13.5%, 80% 12%, 85% 10%, 90% 8%,
+        95% 4%, 100% 0%, 100% 100%, 0% 100%
+    );
+}
+
+#register-form input[type="submit"]:hover {
+    background-color: #FFB8DE;
+}
