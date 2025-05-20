@@ -5,15 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/profile.css">
     <link rel="stylesheet" href="./styles/output.css">
     <script type="module" src="./js/app.js" defer></script>
 </head>
-<!-- <style>
-    html,
-    body {
-        height: 100%;
-    }
-</style> -->
 
 <body class="h-screen flex flex-col">
     <header class="w-full bg-[#1e1e4a] text-white">
@@ -23,15 +18,16 @@
 
                 <!-- Botones -->
                 <div class="flex space-x-4">
-                    <a href="./" class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
+                    <a href="./home.html"
+                        class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium rounded-sm">
                         INICIO
                     </a>
                     <a href="./profile.html"
-                        class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
+                        class="bg-[#ffb847] hover:bg-[#e0a03a] transition-colors px-6 py-2 font-medium rounded-sm">
                         PERFIL
                     </a>
                     <a href="./upload-product.html"
-                        class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
+                        class="bg-[#ff0000] hover:bg-[#d12626] transition-colors px-6 py-2 font-medium rounded-sm">
                         SUBIR PRODUCTO
                     </a>
                 </div>
@@ -51,42 +47,108 @@
             <!-- Barra busqueda -->
             <form class="flex mt-4 gap-4">
                 <input type="text" placeholder="Buscar productos..."
-                    class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none" />
+                    class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none rounded-sm" />
                 <input type="submit"
-                    class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-4 py-2 flex items-center text-white">
+                    class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-4 py-2 flex items-center text-white rounded-sm">
             </form>
         </div>
     </header>
 
-    <main class="flex-1 w-full">
+    <main id="profile-main" class="flex-1 w-full">
         <div class="flex w-full h-full justify-evenly">
             <!-- Primer div: 2 labels, 2 inputs y botón submit -->
-            <div class="bg-red-300 flex-1 w-1/2 h-full p-6 flex flex-col justify-center gap-4">
-                <form>
-                    <label for="input1" class="block font-semibold">Etiqueta 1</label>
-                    <input id="input1" type="text" class="w-full px-3 py-2 border rounded" />
+            <div class="flex-[55] w-1/2 h-full p-6 flex flex-col justify-center items-center gap-4">
+                <h1 class="text-white text-4xl">MODIFICAR DATOS</h1>
 
-                    <label for="input2" class="block font-semibold">Etiqueta 2</label>
-                    <input id="input2" type="text" class="w-full px-3 py-2 border rounded" />
+                <form class="w-3/4 h-5/6 flex flex-col justify-evenly items-center gap-6">
+                    <!-- Grupo: Usuario -->
+                    <div class="w-full flex flex-col items-center gap-2">
+                        <label for="profile-username" class="w-3/4 text-left text-white text-2xl">NOMBRE DE
+                            USUARIO</label>
+                        <input id="profile-username" type="text"
+                            class="w-3/4 h-16 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-2xl rounded-lg px-4"
+                            placeholder="Nombre de usuario" />
+                    </div>
 
-                    <button type="submit"
-                        class="mt-4 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
-                        Enviar
-                    </button>
+                    <!-- Grupo: Contraseña -->
+                    <div class="w-full flex flex-col items-center gap-2">
+                        <label for="profile-password" class="w-3/4 text-left text-white text-2xl">CONTRASEÑA</label>
+                        <input id="profile-password" type="password"
+                            class="w-3/4 h-16 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-2xl rounded-lg px-4"
+                            placeholder="Contraseña" />
+                    </div>
+
+                    <!-- Botón -->
+                    <input id="profile-submit-button" type="submit"
+                        class="mt-4 bg-[#ffb847] font-extrabold text-white px-6 py-3 rounded hover:bg-[#ffb8de] hover:text-black transition text-xl"
+                        value="Enviar" />
                 </form>
             </div>
 
-            <!-- Segundo div: formulario para cambiar imagen de perfil -->
-            <div class="bg-blue-500 flex-1 w-1/2 h-full p-6 flex flex-col justify-center">
-                <form>
-                    <label for="profileImage" class="block text-white font-semibold mb-2">Cambiar imagen de
-                        perfil</label>
-                    <input id="profileImage" type="file" accept="image/*" class="mb-4" />
-                    <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition">
-                        Subir imagen
-                    </button>
+            <!-- Segundo div: formulario imagen de perfil -->
+            <div class="flex-[45] w-1/2 h-full p-6 flex flex-col justify-center items-center gap-4">
+                <h1 class="text-white text-4xl">SUBIR IMAGEN DE PERFIL</h1>
+
+                <form class="w-11/12 h-5/6 flex flex-col justify-evenly items-center gap-6">
+                    <!-- Contenedor imagen con padding y estilo -->
+
+                    <img id="preview" src="" alt="Vista previa"
+                        class="hidden w-8/12 aspect-square object-cover rounded-full border-2 border-white" />
+
+
+                    <!-- Botones de acción -->
+                    <div id="image-buttons" class="hidden flex gap-4">
+                        <input id="profile-image-submit-button" type="submit"
+                            class="bg-[#ffb847] font-bold text-white px-6 py-3 rounded hover:bg-[#ffb8de] hover:text-black transition text-xl"
+                            value="Confirmar" />
+
+                        <button type="button" id="remove-image-button"
+                            class="bg-red-600 font-bold text-white px-6 py-3 rounded hover:bg-gray-700 transition text-xl">
+                            Eliminar
+                        </button>
+                    </div>
+
+                    <!-- Botón para elegir archivo -->
+                    <input id="profileImage" type="file" accept="image/*"
+                        class="file:bg-blue-700 file:text-white file:font-bold file:px-4 file:py-2 file:rounded file:hover:bg-blue-800 file:transition text-white" />
                 </form>
             </div>
+
+            <script>
+                const fileInput = document.getElementById('profileImage');
+                const submitButton = document.getElementById('profile-image-submit-button');
+                const removeButton = document.getElementById('remove-image-button');
+                const preview = document.getElementById('preview');
+                const buttonGroup = document.getElementById('image-buttons');
+
+                fileInput.addEventListener('change', () => {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = e => {
+                            preview.src = e.target.result;
+                            preview.classList.remove('hidden');
+                        };
+
+                        reader.readAsDataURL(file);
+
+                        fileInput.classList.add('hidden');
+                        buttonGroup.classList.remove('hidden');
+                    }
+                });
+
+                removeButton.addEventListener('click', () => {
+                    // Resetear input
+                    fileInput.value = "";
+                    fileInput.classList.remove('hidden');
+
+                    // Ocultar imagen y botones
+                    preview.src = "";
+                    preview.classList.add('hidden');
+                    buttonGroup.classList.add('hidden');
+                });
+            </script>
         </div>
     </main>
 
