@@ -60,14 +60,14 @@
             <div class="flex-[55] w-1/2 h-full p-6 flex flex-col justify-center items-center gap-4">
                 <h1 class="text-white text-4xl">MODIFICAR DATOS</h1>
 
-                <form class="w-3/4 h-5/6 flex flex-col justify-evenly items-center gap-6">
+                <form id="profile-form" class="w-3/4 h-5/6 flex flex-col justify-evenly items-center gap-6">
                     <!-- Grupo: Usuario -->
                     <div class="w-full flex flex-col items-center gap-2">
                         <label for="profile-username" class="w-3/4 text-left text-white text-2xl">NOMBRE DE
                             USUARIO</label>
                         <input id="profile-username" type="text"
                             class="w-3/4 h-16 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-2xl rounded-lg px-4"
-                            placeholder="Nombre de usuario" />
+                            maxlength="50"/>
                     </div>
 
                     <!-- Grupo: Contraseña -->
@@ -89,7 +89,7 @@
             <div class="flex-[45] w-1/2 h-full p-6 flex flex-col justify-center items-center gap-4">
                 <h1 class="text-white text-4xl">SUBIR IMAGEN DE PERFIL</h1>
 
-                <form class="w-11/12 h-5/6 flex flex-col justify-evenly items-center gap-6">
+                <form id="profile-image-form" class="w-11/12 h-5/6 flex flex-col justify-evenly items-center gap-6">
                     <!-- Contenedor imagen con padding y estilo -->
 
                     <img id="preview" src="" alt="Vista previa"
@@ -102,53 +102,19 @@
                             class="bg-[#ffb847] font-bold text-white px-6 py-3 rounded hover:bg-[#ffb8de] hover:text-black transition text-xl"
                             value="Confirmar" />
 
-                        <button type="button" id="remove-image-button"
+                        <button type="button" id="profile-remove-image-button"
                             class="bg-red-600 font-bold text-white px-6 py-3 rounded hover:bg-gray-700 transition text-xl">
                             Eliminar
                         </button>
                     </div>
 
                     <!-- Botón para elegir archivo -->
-                    <input id="profileImage" type="file" accept="image/*"
+                    <input id="profile-file-input" type="file" accept="image/*"
                         class="file:bg-blue-700 file:text-white file:font-bold file:px-4 file:py-2 file:rounded file:hover:bg-blue-800 file:transition text-white" />
                 </form>
             </div>
 
-            <script>
-                const fileInput = document.getElementById('profileImage');
-                const submitButton = document.getElementById('profile-image-submit-button');
-                const removeButton = document.getElementById('remove-image-button');
-                const preview = document.getElementById('preview');
-                const buttonGroup = document.getElementById('image-buttons');
-
-                fileInput.addEventListener('change', () => {
-                    const file = fileInput.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-
-                        reader.onload = e => {
-                            preview.src = e.target.result;
-                            preview.classList.remove('hidden');
-                        };
-
-                        reader.readAsDataURL(file);
-
-                        fileInput.classList.add('hidden');
-                        buttonGroup.classList.remove('hidden');
-                    }
-                });
-
-                removeButton.addEventListener('click', () => {
-                    // Resetear input
-                    fileInput.value = "";
-                    fileInput.classList.remove('hidden');
-
-                    // Ocultar imagen y botones
-                    preview.src = "";
-                    preview.classList.add('hidden');
-                    buttonGroup.classList.add('hidden');
-                });
-            </script>
+            
         </div>
     </main>
 

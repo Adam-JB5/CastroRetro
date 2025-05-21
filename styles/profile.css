@@ -15,7 +15,7 @@
 
 #profile-main {
     background: 
-        url(../assets/images/FondoPatron_4000x4000.png) repeat,
+        url(../assets/images/SeamlessBG.png) repeat,
         #1B1D36;
     animation: moverFondo 1250s linear infinite;
     background-position: 50% 50%;
@@ -36,11 +36,11 @@ label {
     font-family: "Montserrat";
 }
 
-#profile-submit-button {
+#profile-submit-button, #profile-image-submit-button {
     font-family: "Montserrat";
     transition: all 0.6s;
 }
 
-#profile-submit-button:hover {
+#profile-submit-button:hover, #profile-image-submit-button:hover {
     background-color: #FFB8DE;
 }

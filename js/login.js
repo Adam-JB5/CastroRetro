@@ -34,7 +34,7 @@ export default function login() {
             })
               .then(res => {
                 if (res.ok) {
-                  window.location.href = "home.html";
+                  window.location.href = "./home.html";
                 } else {
                   mostrarError(data.mensaje);
                 }

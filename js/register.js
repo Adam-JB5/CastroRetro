@@ -19,8 +19,6 @@ export default function register() {
             return;
         }
 
-        // 🧼 Limpiar errores previos si hay
-        limpiarError();
 
         fetch("http://127.0.0.1:8080/CastroRetro/api/register", {
             method: "POST",
@@ -82,12 +80,5 @@ export default function register() {
         setTimeout(() => {
             window.location.href = "login.html";
         }, 1000);
-    }
-
-    function limpiarError() {
-        const errorDiv = document.getElementById("register-error");
-        if (errorDiv) {
-            errorDiv.remove();
-        }
     }
 }
