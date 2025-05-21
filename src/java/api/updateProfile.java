@@ -8,27 +8,25 @@ package api;
 import DB.DBConnection;
 import DB.UsuarioDML;
 import Modelo.Usuario;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author adamj
  */
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-
-@WebServlet("/api/login") // Esto define la URL donde escuchara
-public class login extends HttpServlet {
+@WebServlet("/api/update-profile")
+public class updateProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,29 +46,33 @@ public class login extends HttpServlet {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
-        // Leer parámetros del formulario
-        String email = request.getParameter("email");
+        String id = request.getParameter("id");
         String password = request.getParameter("password");
+        String username = request.getParameter("username");
 
         PrintWriter out = response.getWriter();
 
         try (Connection conn = DBConnection.getConnection()) {
-            Usuario usuario = UsuarioDML.obtenerUsuarioLogin(conn, email, password);
+            boolean actualizado = false;
 
-            if (usuario != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
+            if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
+                actualizado = UsuarioDML.actualizarUsernamePassword(conn, id, username, password);
 
-                response.setStatus(HttpServletResponse.SC_OK);
+            } else if (username != null && !username.isEmpty()) {
+                actualizado = UsuarioDML.actualizarUsername(conn, id, username);
 
-                String usuarioJson = new Gson().toJson(usuario);
-                out.print("{\"success\": true, \"mensaje\": \"Inicio de sesión exitoso\", \"usuario\": " + usuarioJson + "}");
-
-            } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                out.print("{\"success\": false, \"mensaje\": \"Credenciales incorrectas\"}");
+            } else if (password != null && !password.isEmpty()) {
+                actualizado = UsuarioDML.actualizarPassword(conn, id, password);
             }
 
+            if (actualizado) {
+                Usuario usuarioActualizado = UsuarioDML.obtenerUsuarioPorId(conn, id);
+                String usuarioJson = new Gson().toJson(usuarioActualizado);
+                out.print("{\"success\": true, \"mensaje\": \"Perfil actualizado correctamente\", \"usuario\": " + usuarioJson + "}");
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                out.print("{\"success\": false, \"mensaje\": \"No se actualizaron los datos correctamente\"}");
+            }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.print("{\"success\": false, \"mensaje\": \"Error en el servidor: " + e.getMessage() + "\"}");

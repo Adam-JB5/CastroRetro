@@ -5,15 +5,8 @@
  */
 package api;
 
-import DB.DBConnection;
-import DB.UsuarioDML;
-import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import com.google.gson.Gson;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamj
  */
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-
-@WebServlet("/api/login") // Esto define la URL donde escuchara
-public class login extends HttpServlet {
+public class updateProfileImage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,42 +29,19 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-
-        // Leer parámetros del formulario
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        PrintWriter out = response.getWriter();
-
-        try (Connection conn = DBConnection.getConnection()) {
-            Usuario usuario = UsuarioDML.obtenerUsuarioLogin(conn, email, password);
-
-            if (usuario != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
-
-                response.setStatus(HttpServletResponse.SC_OK);
-
-                String usuarioJson = new Gson().toJson(usuario);
-                out.print("{\"success\": true, \"mensaje\": \"Inicio de sesión exitoso\", \"usuario\": " + usuarioJson + "}");
-
-            } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                out.print("{\"success\": false, \"mensaje\": \"Credenciales incorrectas\"}");
-            }
-
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"success\": false, \"mensaje\": \"Error en el servidor: " + e.getMessage() + "\"}");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet updateProfileImage</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet updateProfileImage at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        out.flush();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
