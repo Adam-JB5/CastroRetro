@@ -14,7 +14,7 @@
 
 #register-screen {
     background: 
-        url(../assets/images/FondoPatron_4000x4000.png) repeat,
+        url(../assets/images/SeamlessBG.png) repeat,
         #1B1D36;
     animation: moverFondo2 1250s linear infinite;
     background-position: 50% 50%;

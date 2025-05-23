@@ -11,45 +11,47 @@
 
 <body>
 	<header class="w-full bg-[#1e1e4a] text-white">
-		<div class="container mx-auto px-4 py-4">
-			
+        <div class="container mx-auto px-4 py-4">
 
-			<div class="flex flex-col md:flex-row justify-between items-center gap-4">
-				
-				<!-- Botones -->
-				<div class="flex space-x-4">
-					<a href="./" class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
-						INICIO
-					</a>
-					<a href="./profile.html" class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
-						PERFIL
-					</a>
-					<a href="./upload-product.html"
-						class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium">
-						SUBIR PRODUCTO
-					</a>
-				</div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
 
-				<!-- Info. usuario -->
-				<div class="flex items-center space-x-3">
-					<div class="text-right">
-						<p id="header-username" class="text-sm">Nombre de usuario</p>
-						<p id="header-role" class="text-xs text-gray-300">Admin/Usuario</p>
-					</div>
-					<div class="h-10 w-10 rounded-full bg-white overflow-hidden">
-						<img src="/placeholder.svg" alt="User avatar" width="40" height="40" class="object-cover" />
-					</div>
-				</div>
-			</div>
+                <!-- Botones -->
+                <div class="flex space-x-4">
+                    <a href="./home.html"
+                        class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-6 py-2 font-medium rounded-sm">
+                        INICIO
+                    </a>
+                    <a href="./profile.html"
+                        class="bg-[#ffb847] hover:bg-[#e0a03a] transition-colors px-6 py-2 font-medium rounded-sm">
+                        PERFIL
+                    </a>
+                    <a href="./upload-product.html"
+                        class="bg-[#ff0000] hover:bg-[#d12626] transition-colors px-6 py-2 font-medium rounded-sm">
+                        SUBIR PRODUCTO
+                    </a>
+                </div>
 
-			<!-- Barra busqueda -->
-			<form class="flex mt-4 gap-4">
-				<input type="text" placeholder="Buscar productos..."
-					class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none" />
-				<input type="submit" class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-4 py-2 flex items-center text-white">
-			</form>
-		</div>
-	</header>
+                <!-- Info. usuario -->
+                <div class="flex items-center space-x-3">
+                    <div class="text-right">
+                        <p id="header-username" class="text-sm">Nombre de usuario</p>
+                        <p id="header-role" class="text-xs text-gray-300">Admin/Usuario</p>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-white overflow-hidden">
+                        <img id="header-profile-image" src="./assets/images/profilePlaceholder.svg" alt="User avatar" width="40" height="40" class="object-cover" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra busqueda -->
+            <form class="flex mt-4 gap-4">
+                <input type="text" placeholder="Buscar productos..."
+                    class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none rounded-sm" />
+                <input type="submit"
+                    class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-2 flex items-center text-white rounded-sm">
+            </form>
+        </div>
+    </header>
 
 </body>
 

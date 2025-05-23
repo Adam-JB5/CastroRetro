@@ -19,7 +19,7 @@
                 <!-- Botones -->
                 <div class="flex space-x-4">
                     <a href="./home.html"
-                        class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-6 py-2 font-medium rounded-sm">
+                        class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-6 py-2 font-medium rounded-sm">
                         INICIO
                     </a>
                     <a href="./profile.html"
@@ -39,7 +39,7 @@
                         <p id="header-role" class="text-xs text-gray-300">Admin/Usuario</p>
                     </div>
                     <div class="h-10 w-10 rounded-full bg-white overflow-hidden">
-                        <img src="/placeholder.svg" alt="User avatar" width="40" height="40" class="object-cover" />
+                        <img id="header-profile-image" src="./assets/images/profilePlaceholder.svg" alt="User avatar" width="40" height="40" class="object-cover" />
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <input type="text" placeholder="Buscar productos..."
                     class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none rounded-sm" />
                 <input type="submit"
-                    class="bg-[#1a1a2e] hover:bg-[#2a2a4e] transition-colors px-4 py-2 flex items-center text-white rounded-sm">
+                    class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-2 flex items-center text-white rounded-sm">
             </form>
         </div>
     </header>
@@ -67,7 +67,7 @@
                             USUARIO</label>
                         <input id="profile-username" type="text"
                             class="w-3/4 h-16 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-2xl rounded-lg px-4"
-                            maxlength="50"/>
+                            maxlength="50" />
                     </div>
 
                     <!-- Grupo: Contraseña -->
@@ -90,10 +90,15 @@
                 <h1 class="text-white text-4xl">SUBIR IMAGEN DE PERFIL</h1>
 
                 <form id="profile-image-form" class="w-11/12 h-5/6 flex flex-col justify-evenly items-center gap-6">
-                    <!-- Contenedor imagen con padding y estilo -->
 
+                    <!-- Contenedor imagen con padding y estilo -->
                     <img id="preview" src="" alt="Vista previa"
                         class="hidden w-8/12 aspect-square object-cover rounded-full border-2 border-white" />
+
+
+                    <!-- Boton para elegir archivo -->
+                    <input id="profile-file-input" type="file" accept="image/*"
+                        class="file:bg-blue-700 file:text-white file:font-bold file:px-4 file:py-2 file:rounded file:hover:bg-blue-800 file:transition text-white" />
 
 
                     <!-- Botones de acción -->
@@ -108,13 +113,10 @@
                         </button>
                     </div>
 
-                    <!-- Botón para elegir archivo -->
-                    <input id="profile-file-input" type="file" accept="image/*"
-                        class="file:bg-blue-700 file:text-white file:font-bold file:px-4 file:py-2 file:rounded file:hover:bg-blue-800 file:transition text-white" />
                 </form>
             </div>
 
-            
+
         </div>
     </main>
 

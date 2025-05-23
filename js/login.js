@@ -46,7 +46,7 @@ export default function login() {
       })
       .catch(err => {
         console.error(err); // Error exacto
-        alert("Error al iniciar sesión: " + (err.message || "Error desconocido"));
+        mostrarError("Error al iniciar sesión: " + (err.message || "Error desconocido"));
       });
   });
 

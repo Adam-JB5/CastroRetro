@@ -3,6 +3,7 @@ import register from "./register.js";
 import userValidation from "./userValidation.js";
 import header from "./header.js";
 import updateProfile from "./updateProfile.js";
+import updateProfileImage from "./updateProfileImage.js";
 
     if (window.location.pathname.endsWith("/register.html")) {
         document.addEventListener("DOMContentLoaded", () => {
@@ -25,4 +26,5 @@ import updateProfile from "./updateProfile.js";
 
     if (window.location.pathname.endsWith("/profile.html")) {
         updateProfile();
+        updateProfileImage();
     }
