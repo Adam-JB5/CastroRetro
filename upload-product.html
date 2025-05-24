@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Subir producto</title>
-	<link rel="stylesheet" href="./styles/output.css">
-	<script type="module" src="./js/app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir producto</title>
+    <link rel="stylesheet" href="./styles/output.css">
+    <script type="module" src="./js/app.js" defer></script>
 </head>
 
 <body>
-	<header class="w-full bg-[#1e1e4a] text-white">
+    <header class="w-full bg-[#1e1e4a] text-white">
         <div class="container mx-auto px-4 py-4">
 
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -38,7 +38,8 @@
                         <p id="header-role" class="text-xs text-gray-300">Admin/Usuario</p>
                     </div>
                     <div class="h-10 w-10 rounded-full bg-white overflow-hidden">
-                        <img id="header-profile-image" src="./assets/images/profilePlaceholder.svg" alt="User avatar" width="40" height="40" class="object-cover" />
+                        <img id="header-profile-image" src="./assets/icons/profilePlaceholder.svg" alt="User avatar"
+                            width="40" height="40" class="object-cover" />
                     </div>
                 </div>
             </div>
@@ -53,11 +54,87 @@
         </div>
     </header>
 
-	<main id="upload-product-main" class="flex-1 w-full">
-		<h1>VENDA SU PRODUCTO</h1>
+    <main id="upload-product-main" class="flex flex-col items-center justify-start w-full">
 
-		
-	</main>
+        <h1 class="text-3xl font-bold justify-self-start">SUBIR PRODUCTO</h1>
+        <div class="flex flex-col justify-center items-center gap-8 w-full">
+
+            <!-- Seccion categoria -->
+            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+                <div class="flex">
+                    <h2 class="text-xl font-semibold mb-4">CATEGORÍA</h2>
+                    <p>&nbsp;&nbsp;(Elija la categoría del producto)</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6">
+
+                    <div
+                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        <img src="./assets/icons/gameboy.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
+                        <h3 class="text-center text-sm font-medium">CONSOLA</h3>
+                    </div>
+
+                    <div
+                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        <img src="./assets/icons/cartridge.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
+                        <h3 class="text-center text-sm font-medium">VIDEOJUEGO</h3>
+                    </div>
+
+                    <div
+                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        <img src="./assets/icons/controller.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
+                        <h3 class="text-center text-sm font-medium">ACCESORIO</h3>
+                    </div>
+
+                    <div
+                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        <img src="./assets/icons/other.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
+                        <h3 class="text-center text-sm font-medium">OTRO</h3>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Seccion fotos -->
+            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+                <div class="flex">
+                    <h2 class="text-xl font-semibold mb-4">FOTOS</h2>
+                    <p>&nbsp;&nbsp;(Máx. 10 fotos | Máx. 10 MB)</p>
+                </div>
+
+            </div>
+
+            <!-- Seccion titulo -->
+            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+                <div class="flex">
+                    <h2 class="text-xl font-semibold mb-4">TÍTULO</h2>
+                    <p>&nbsp;&nbsp;(Ponle un buen título para atraer a compradores)</p>
+                </div>
+
+                <input type="text" class="w-full border border-gray-300 rounded-md p-2" />
+            </div>
+
+            <!-- Seccion descripcion -->
+            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+                <div class="flex">
+                    <h2 class="text-xl font-semibold mb-4">DESCRIPCIÓN</h2>
+                    <p>&nbsp;&nbsp;(Describe bien tu artículo para atraer a compradores: Estado, funcionamiento, daños...)</p>
+                </div>
+
+                <textarea class="w-full border border-gray-300 rounded-md p-2" rows="4"></textarea>
+            </div>
+
+            <!-- Seccion precio -->
+            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+                <div class="flex">
+                    <h2 class="text-xl font-semibold mb-4">PRECIO</h2>
+                    <p>&nbsp;&nbsp;(Sé justo...)</p>
+                </div>
+
+                <input type="number" class="w-full border border-gray-300 rounded-md p-2" />
+            </div>
+        </div>
+    </main>
 
 </body>
 
