@@ -91,4 +91,13 @@ public class UsuarioDML {
             return stmt.executeUpdate() > 0;
         }
     }
+    
+    public static boolean actualizarImagenPerfil(Connection conn, String id, String ruta) throws Exception {
+    String sql = "UPDATE usuarios SET profile_image = ? WHERE user_id = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, ruta);
+        stmt.setString(2, id);
+        return stmt.executeUpdate() > 0;
+    }
+}
 }

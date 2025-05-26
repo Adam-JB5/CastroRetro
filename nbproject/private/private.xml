@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/updateProfileImage.java</file>
             <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/validateSession.java</file>
             <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/login.java</file>
+            <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/DB/UsuarioDML.java</file>
+            <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/updateProfile.java</file>
             <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/Modelo/Usuario.java</file>
+            <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/register.java</file>
             <file>file:/C:/Users/adamj/netbeans-workspace/CastroRetro/src/java/api/uploadProduct.java</file>
         </group>
     </open-files>
