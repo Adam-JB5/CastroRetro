@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir producto</title>
+    <link rel="stylesheet" href="./styles/uploadProduct.css">
     <link rel="stylesheet" href="./styles/output.css">
     <script type="module" src="./js/app.js" defer></script>
 </head>
@@ -54,13 +55,14 @@
         </div>
     </header>
 
-    <main id="upload-product-main" class="flex flex-col items-center justify-start w-full">
+    <main id="upload-product-main" class="bg-[#1b1d36] text-white flex flex-col items-center justify-start w-full">
 
-        <h1 class="text-3xl font-bold justify-self-start">SUBIR PRODUCTO</h1>
+        <h1 class="text-7xl p-2 mb-6">SUBIR PRODUCTO</h1>
+
         <div class="flex flex-col justify-center items-center gap-8 w-full">
 
             <!-- Seccion categoria -->
-            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
+            <div class="bg-[#282c63d1] w-6/12 p-6 rounded-lg shadow-md">
                 <div class="flex">
                     <h2 class="text-xl font-semibold mb-4">CATEGORÍA</h2>
                     <p>&nbsp;&nbsp;(Elija la categoría del producto)</p>
@@ -69,25 +71,29 @@
                 <div class="flex flex-wrap justify-center gap-6">
 
                     <div
-                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        class="category w-40 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ff0000] hover:border-0 transition-colors cursor-pointer"
+                        data-category="Consola" data-bg="#ff0000">
                         <img src="./assets/icons/gameboy.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">CONSOLA</h3>
                     </div>
 
                     <div
-                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        class="category w-40 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb8de] hover:border-0 transition-colors cursor-pointer"
+                        data-category="Juego" data-bg="#ffb8de">
                         <img src="./assets/icons/cartridge.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">VIDEOJUEGO</h3>
                     </div>
 
                     <div
-                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        class="category w-40 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffff00] hover:border-0 transition-colors cursor-pointer"
+                        data-category="Accesorio" data-bg="#ffff00">
                         <img src="./assets/icons/controller.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">ACCESORIO</h3>
                     </div>
 
                     <div
-                        class="w-40 h-40 flex flex-col justify-around items-center bg-slate-400 border-2 border-white rounded-md p-2">
+                        class="category w-40 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb847] hover:border-0 transition-colors cursor-pointer"
+                        data-category="Otro" data-bg="#ffb847">
                         <img src="./assets/icons/other.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">OTRO</h3>
                     </div>
@@ -95,43 +101,79 @@
                 </div>
             </div>
 
-            <!-- Seccion fotos -->
-            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
-                <div class="flex">
-                    <h2 class="text-xl font-semibold mb-4">FOTOS</h2>
-                    <p>&nbsp;&nbsp;(Máx. 10 fotos | Máx. 10 MB)</p>
+            <div id="upload-product-sections" class="flex flex-col justify-center items-center gap-8 w-full opacity-0 pointer-events-none">
+                <!-- Seccion fotos -->
+                <div class="bg-[#282c63d1] w-6/12 p-6 rounded-lg shadow-md">
+                    <div class="flex">
+                        <h2 class="text-xl font-semibold mb-4">FOTOS</h2>
+                        <p class="text-gray-400">&nbsp;&nbsp;(Máx. 10 fotos | Máx. 10 MB)</p>
+                    </div>
+
+                    <div id="upload-product-ai-div" class="bg-green-950 p-2 my-1 w-full rounded-md hidden">
+                        <p>Prueba nuestra herramienta de reconocimiento de imágenes, sube una foto de tu producto y se intentará autocompletar el formulario</p>
+                        <input type="file" name="" id="upload-product-ai-image-input">
+                    </div>
+
+                    <label for="file-upload"
+                        class="block w-full h-40 bg-black bg-opacity-30 border-2 border-dashed border-gray-400 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-white transition">
+                        <span class="text-gray-300">Haz clic para añadir tus fotos aquí</span>
+                        <input id="file-upload" type="file" multiple accept="image/*" class="hidden" />
+                    </label>
+
+                    <div id="preview" class="grid grid-cols-5 justify-center items-center gap-2 mt-2">
+
+                    </div>
+
+                    <button id="upload-product-delete-images-button"
+                        class="w-full bg-[#ff0000] disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-[#d12626] transition-colors p-2 mt-4 font-medium rounded-sm"
+                        disabled>ELIMINAR FOTOS</button>
+
                 </div>
 
-            </div>
 
-            <!-- Seccion titulo -->
-            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
-                <div class="flex">
-                    <h2 class="text-xl font-semibold mb-4">TÍTULO</h2>
-                    <p>&nbsp;&nbsp;(Ponle un buen título para atraer a compradores)</p>
+                <!-- Seccion titulo -->
+                <div class="bg-[#282c63d1] w-6/12 p-6 rounded-lg shadow-md">
+                    <div class="flex">
+                        <h2 class="text-xl font-semibold mb-4">TÍTULO</h2>
+                        <p class="text-gray-400">&nbsp;&nbsp;(Ponle un buen título para atraer a compradores)</p>
+                    </div>
+
+                    <input id="upload-product-titulo" type="text"
+                        class="w-full h-12 bg-black bg-opacity-80 focus:bg-opacity-100 rounded-lg px-4 hover:border-white" />
                 </div>
 
-                <input type="text" class="w-full border border-gray-300 rounded-md p-2" />
-            </div>
+                <!-- Seccion descripcion -->
+                <div class="bg-[#282c63d1] w-6/12 p-6 rounded-lg shadow-md">
+                    <div class="flex">
+                        <h2 class="text-xl font-semibold mb-4">DESCRIPCIÓN</h2>
+                        <p class="text-gray-400">&nbsp;&nbsp;(Describe bien tu artículo para atraer a compradores:
+                            Estado,
+                            funcionamiento, daños...)</p>
+                    </div>
 
-            <!-- Seccion descripcion -->
-            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
-                <div class="flex">
-                    <h2 class="text-xl font-semibold mb-4">DESCRIPCIÓN</h2>
-                    <p>&nbsp;&nbsp;(Describe bien tu artículo para atraer a compradores: Estado, funcionamiento, daños...)</p>
+                    <textarea id="upload-product-descripcion"
+                        class="w-full bg-black bg-opacity-80 focus:bg-opacity-100 rounded-lg p-1 hover:border-white"
+                        rows="4"></textarea>
                 </div>
 
-                <textarea class="w-full border border-gray-300 rounded-md p-2" rows="4"></textarea>
-            </div>
+                <!-- Seccion precio -->
+                <div class="bg-[#282c63d1] w-6/12 p-6 rounded-lg shadow-md">
+                    <div class="flex">
+                        <h2 class="text-xl font-semibold mb-4">PRECIO</h2>
+                        <p class="text-gray-400">&nbsp;&nbsp;(Sé justo...)</p>
+                    </div>
 
-            <!-- Seccion precio -->
-            <div class="w-6/12 bg-slate-400 p-6 rounded-lg shadow-md">
-                <div class="flex">
-                    <h2 class="text-xl font-semibold mb-4">PRECIO</h2>
-                    <p>&nbsp;&nbsp;(Sé justo...)</p>
+                    <div class="flex w-full justify-between items-center">
+                        <input id="upload-product-precio" type="number"
+                            class="w-10/12 h-12 bg-black bg-opacity-80 focus:bg-opacity-100 rounded-lg px-4 hover:border-white" />
+                        <div class="bg-black w-1/12 h-12 flex justify-center items-center rounded-md">€</div>
+                    </div>
                 </div>
 
-                <input type="number" class="w-full border border-gray-300 rounded-md p-2" />
+                <!-- Botones -->
+                <input id="upload-product-submit" type="submit"
+                    class="w-5/12 bg-[#ffb847] hover:bg-[#d19637] transition-colors px-6 py-4 mb-8 font-medium rounded-sm"
+                    value="SUBIR PRODUCTO">
             </div>
         </div>
     </main>

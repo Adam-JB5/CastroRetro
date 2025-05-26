@@ -4,6 +4,7 @@ import userValidation from "./userValidation.js";
 import header from "./header.js";
 import updateProfile from "./updateProfile.js";
 import updateProfileImage from "./updateProfileImage.js";
+import uploadProduct from "./uploadProduct.js";
 
     if (window.location.pathname.endsWith("/register.html")) {
         document.addEventListener("DOMContentLoaded", () => {
@@ -27,4 +28,8 @@ import updateProfileImage from "./updateProfileImage.js";
     if (window.location.pathname.endsWith("/profile.html")) {
         updateProfile();
         updateProfileImage();
+    }
+
+    if (window.location.pathname.endsWith("/upload-product.html")) {
+        uploadProduct();
     }
