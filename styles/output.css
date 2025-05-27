@@ -755,8 +755,8 @@ video {
   width: 60%;
 }
 
-.w-40 {
-  width: 10rem;
+.w-36 {
+  width: 9rem;
 }
 
 .w-5\/12 {
@@ -777,6 +777,14 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-7\/12 {
+  width: 58.333333%;
 }
 
 .flex-1 {

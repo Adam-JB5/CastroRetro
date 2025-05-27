@@ -1,4 +1,4 @@
-import { mostrarError, mostrarExito } from "./utils.js";
+import { mostrarError, mostrarExito, consolasMap } from "./utils.js";
 
 export default function uploadProduct() {
 
@@ -7,6 +7,76 @@ export default function uploadProduct() {
 
     let allFiles = [];
 
+    function reconocimientoConsolas() {
+        const inputImage = document.getElementById("upload-product-ai-image-input");
+
+        inputImage.addEventListener("change", () => {
+            const file = inputImage.files[0];
+
+            if (!file) {
+                mostrarError("No se seleccionó ningún archivo.");
+                return;
+            }
+
+            if (!file.type.startsWith("image/") || file.type === "image/svg+xml" || file.type === "image/gif") {
+                mostrarError("Por favor, selecciona una imagen válida. (JPG, PNG, WEBP...)");
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onloadend = function () {
+                mostrarExito("CARGANDO...", 2000);
+
+                fetch('http://localhost:8080/CastroRetro/api/detect-console', {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: JSON.stringify({ imagen: reader.result })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Respuesta desde backend:", data);
+
+                        if (!data.labelName || data.confidence <= 0.5) {
+                            mostrarError("No se pudo detectar ninguna consola.");
+                            return;
+                        }
+
+                        const consola = data.labelName;
+
+                        mostrarExito("Se ha detectado: " + consola + ". Por favor comprueba los campos autocompletados.", 6000);
+
+                        let inputNombre = document.getElementById("upload-product-titulo");
+                        let inputDescripcion = document.getElementById("upload-product-descripcion");
+                        let inputPrecio = document.getElementById("upload-product-precio");
+
+                        try {
+                            if (inputNombre) {
+                                inputNombre.value = consolasMap[`${consola}`].nombre;
+                            }
+
+                            if (inputDescripcion) {
+                                inputDescripcion.value = consolasMap[`${consola}`].descripcion;
+                            }
+
+                            if (inputPrecio) {
+                                inputPrecio.value = consolasMap[`${consola}`].precio;
+                            }
+                        } catch (error) {
+                            mostrarError("Ocurrió un error: " + error);
+                        }
+
+
+                    })
+                    .catch(error => {
+                        console.error("Error en la petición:", error);
+                        mostrarError("Error en la petición: " + error.message);
+                    });
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
 
     function mostrarFormulario() {
         const categories = document.querySelectorAll(".category");
@@ -42,7 +112,6 @@ export default function uploadProduct() {
             });
         });
     }
-
 
     function subidaArchivos() {
         const input = document.getElementById("file-upload");
@@ -223,6 +292,7 @@ export default function uploadProduct() {
     }
 
 
+    reconocimientoConsolas();
     subidaArchivos();
     mostrarFormulario();
     prepararEnvio();
