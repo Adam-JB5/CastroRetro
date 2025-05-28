@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Iconos -->
+    <link rel="icon" href="./assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./assets/icons/favicon.png" type="image/png">
+
     <title>Subir producto</title>
     <link rel="stylesheet" href="./styles/uploadProduct.css">
     <link rel="stylesheet" href="./styles/output.css">
@@ -70,29 +76,25 @@
 
                 <div class="flex flex-wrap justify-center gap-6">
 
-                    <div
-                        class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ff0000] hover:border-0 transition-colors cursor-pointer"
+                    <div class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ff0000] hover:border-0 transition-colors cursor-pointer"
                         data-category="Consola" data-bg="#ff0000">
                         <img src="./assets/icons/gameboy.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">CONSOLA</h3>
                     </div>
 
-                    <div
-                        class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb8de] hover:border-0 transition-colors cursor-pointer"
+                    <div class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb8de] hover:border-0 transition-colors cursor-pointer"
                         data-category="Juego" data-bg="#ffb8de">
                         <img src="./assets/icons/cartridge.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">VIDEOJUEGO</h3>
                     </div>
 
-                    <div
-                        class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffff00] hover:border-0 transition-colors cursor-pointer"
+                    <div class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffff00] hover:border-0 transition-colors cursor-pointer"
                         data-category="Accesorio" data-bg="#ffff00">
                         <img src="./assets/icons/controller.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">ACCESORIO</h3>
                     </div>
 
-                    <div
-                        class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb847] hover:border-0 transition-colors cursor-pointer"
+                    <div class="category w-36 h-40 flex flex-col justify-around items-center rounded-md p-2 hover:bg-[#ffb847] hover:border-0 transition-colors cursor-pointer"
                         data-category="Otro" data-bg="#ffb847">
                         <img src="./assets/icons/other.svg" alt="" class="w-10/12 h-auto object-cover mb-2">
                         <h3 class="text-center text-sm font-medium">OTRO</h3>
@@ -101,7 +103,8 @@
                 </div>
             </div>
 
-            <div id="upload-product-sections" class="flex flex-col justify-center items-center gap-8 w-full opacity-0 pointer-events-none">
+            <div id="upload-product-sections"
+                class="flex flex-col justify-center items-center gap-8 w-full opacity-0 pointer-events-none">
                 <!-- Seccion fotos -->
                 <div class="bg-[#282c63d1] w-7/12 p-6 rounded-lg shadow-md">
                     <div class="flex">
@@ -109,9 +112,16 @@
                         <p class="text-gray-400">&nbsp;&nbsp;(Máx. 10 fotos | Máx. 10 MB)</p>
                     </div>
 
-                    <div id="upload-product-ai-div" class="bg-green-950 p-2 my-1 w-full rounded-md hidden">
-                        <p>Prueba nuestra herramienta de reconocimiento de imágenes, sube una foto de tu producto y se intentará autocompletar el formulario</p>
-                        <input type="file" name="" accept="image/*" id="upload-product-ai-image-input">
+                    <div id="upload-product-ai-div"
+                        class="bg-[#122c1a] border border-green-800 p-4 rounded-lg mb-4 text-white shadow-inner hidden">
+                        <h3 class="text-lg font-semibold text-green-300 mb-2">🎮Reconocimiento de Consolas✨</h3>
+                        <p class="text-sm text-green-100 mb-2">Prueba nuestra herramienta de reconocimiento de imágenes.
+                            Sube una foto de tu consola y se intentará autocompletar el formulario.</p>
+                        <label for="upload-product-ai-image-input"
+                            class="inline-block px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded cursor-pointer transition">
+                            Seleccionar imagen
+                        </label>
+                        <input type="file" accept="image/*" id="upload-product-ai-image-input" class="hidden">
                     </div>
 
                     <label for="file-upload"

@@ -5,6 +5,7 @@ import header from "./header.js";
 import updateProfile from "./updateProfile.js";
 import updateProfileImage from "./updateProfileImage.js";
 import uploadProduct from "./uploadProduct.js";
+import home from "./home.js";
 
     if (window.location.pathname.endsWith("/register.html")) {
         document.addEventListener("DOMContentLoaded", () => {
@@ -23,6 +24,10 @@ import uploadProduct from "./uploadProduct.js";
 
         header();
         
+    }
+
+    if (window.location.pathname.endsWith("/home.html")) {
+        home();
     }
 
     if (window.location.pathname.endsWith("/profile.html")) {

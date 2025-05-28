@@ -1,0 +1,20 @@
+#home-category-console {
+	background-image: url('../assets/images/fondoRojo.png');
+}
+
+#home-category-videogame {
+	background-image: url('../assets/images/fondoRosa.png');
+}
+
+#home-category-accesory {
+	background-image: url('../assets/images/fondoAmarillo.png');
+}
+
+#home-category-other {
+	background-image: url('../assets/images/fondoNaranja.png');
+}
+
+.home-category {
+	background-size: cover;
+	background-position: center;
+}
