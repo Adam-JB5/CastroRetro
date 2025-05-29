@@ -25,22 +25,22 @@
 
 <body class="h-screen flex flex-col">
     <header class="w-full bg-[#1e1e4a] text-white">
-        <div class="container mx-auto px-4 py-4">
+        <div class="container mx-auto px-4 pb-4 pt-2">
 
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
 
                 <!-- Botones -->
                 <div class="flex space-x-4">
                     <a href="./home.html"
-                        class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-6 py-2 font-medium rounded-sm">
+                        class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         INICIO
                     </a>
                     <a href="./profile.html"
-                        class="bg-[#ffb847] hover:bg-[#e0a03a] transition-colors px-6 py-2 font-medium rounded-sm">
+                        class="bg-[#ffb847] hover:bg-[#e0a03a] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         PERFIL
                     </a>
                     <a href="./upload-product.html"
-                        class="bg-[#ff0000] hover:bg-[#d12626] transition-colors px-6 py-2 font-medium rounded-sm">
+                        class="bg-[#ff0000] hover:bg-[#d12626] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         SUBIR PRODUCTO
                     </a>
                 </div>
@@ -59,7 +59,7 @@
             </div>
 
             <!-- Barra busqueda -->
-            <form class="flex mt-4 gap-4">
+            <form class="flex mt-2 gap-4">
                 <input type="text" placeholder="Buscar productos..."
                     class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 focus:outline-none rounded-sm" />
                 <input type="submit"
@@ -71,20 +71,28 @@
     <main class="flex flex-col items-center justify-center bg-[#1b1d36] space-y-12 p-8">
 
         <!-- Sección de productos -->
-        <div class="w-full max-w-4xl bg-slate-500 rounded-xl shadow-lg p-6 text-center">
-            <h1 class="text-white text-3xl font-bold mb-6">ÚLTIMOS PRODUCTOS</h1>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="..." class="d-block w-100" alt="...">
-                    </div>
+        <h1 class="text-white text-7xl">ÚLTIMOS PRODUCTOS</h1>
+        <div class="w-full rounded-xl shadow-lg text-center">
+
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
                 </div>
+
+                <!-- Items del carrusel -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active"></div>
+                    <div class="carousel-item"></div>
+                    <div class="carousel-item"></div>
+                </div>
+
+                <!-- Control anterior/siguiente -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -98,25 +106,30 @@
             </div>
         </div>
 
-        <!-- Sección de letras -->
+        <!-- Cateogorias -->
+        <h1 class="text-white text-7xl">CATEGORÍAS</h1>
         <div class="w-11/12 flex justify-between text-white text-xl font-semibold">
 
-            <div id="home-category-console" class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <div id="home-category-console"
+                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
                 <img class="w-11/12 h-auto" src="./assets/icons/gameboy.svg" alt="">
                 <h3>CONSOLAS</h3>
             </div>
 
-            <div id="home-category-videogame" class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <div id="home-category-videogame"
+                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
                 <img class="w-11/12 h-auto" src="./assets/icons/cartridge.svg" alt="">
                 <h3>VIDEOJUEGOS</h3>
             </div>
 
-            <div id="home-category-accesory" class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <div id="home-category-accesory"
+                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
                 <img class="w-11/12 h-auto" src="./assets/icons/controller.svg" alt="">
                 <h3>ACCESORIOS</h3>
             </div>
 
-            <div id="home-category-other" class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <div id="home-category-other"
+                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
                 <img class="w-11/12 h-auto" src="./assets/icons/other.svg" alt="">
                 <h3>OTROS</h3>
             </div>

@@ -274,7 +274,7 @@ export default function uploadProduct() {
                         })
                             .then(res => {
                                 if (res.ok) {
-                                    window.location.reload();
+                                    window.location.href = window.location.pathname;
                                 } else {
                                     mostrarError(data.mensaje);
                                 }

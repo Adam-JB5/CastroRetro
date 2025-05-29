@@ -1,3 +1,39 @@
+@font-face {
+    src: url("../assets/fonts/RetronoidBold.woff2");
+    font-family: 'Retronoid-Bold';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratRegular.woff2");
+    font-family: 'Montserrat';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratBold.woff2");
+    font-family: 'Montserrat-Bold';
+}
+
+@keyframes hoverProducto {
+	100% {
+		
+	}
+}
+
+h1 {
+    font-family: "Retronoid-Bold";
+}
+
+.product {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	transform-style: preserve-3d;
+	perspective: 500px;
+}
+
+.product:hover {
+	transform: translateY(-10px) rotateX(5deg);
+	box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
 #home-category-console {
 	background-image: url('../assets/images/fondoRojo.png');
 }

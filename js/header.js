@@ -13,5 +13,37 @@ export default function header() {
 
     username.innerText = usuario.username;
     role.innerText = usuario.isAdmin ? "Administrador" : "Usuario";
-    profileImage.src = `http://127.0.0.1:8080/CastroRetro/${usuario.profileImage}`;
+    let imageUrl = `http://127.0.0.1:8080/CastroRetro/${usuario.profileImage}`;
+    profileImage.src = imageUrl;
+
+    profileImage.addEventListener("mouseenter", (e) => {
+
+        const preview = document.createElement("div");
+        preview.id = "image-preview-popup";
+
+        preview.style.position = "fixed";
+        preview.style.top = `${e.clientY - 10}px`;
+        preview.style.left = `${e.clientX - 400}px`;
+        preview.style.padding = "10px";
+        preview.style.background = "##1e1e4a";
+        preview.style.border = "1px solid #000000";
+        preview.style.borderRadius = "8px";
+        preview.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+        preview.style.zIndex = "9999";
+
+        const bigImg = document.createElement("img");
+        bigImg.src = imageUrl;
+        bigImg.style.width = "25vw";
+        bigImg.style.height = "auto";
+        bigImg.style.objectFit = "cover";
+        bigImg.style.borderRadius = "4px";
+
+        preview.appendChild(bigImg);
+        document.body.appendChild(preview);
+    });
+
+    profileImage.addEventListener("mouseleave", () => {
+        const popup = document.getElementById("image-preview-popup");
+        if (popup) popup.remove();
+    });
 }
