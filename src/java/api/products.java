@@ -6,9 +6,11 @@
 package api;
 
 import DB.DBConnection;
+import Modelo.Producto;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -87,28 +89,32 @@ public class products extends HttpServlet {
 
             ResultSet rs = stmt.executeQuery();
 
-            Map<Integer, Map<String, Object>> productosMap = new LinkedHashMap<>();
+            Map<Integer, Producto> productosMap = new LinkedHashMap<>();
 
             while (rs.next()) {
                 int productId = rs.getInt("product_id");
 
+                // Si aún no hemos creado el producto, lo instanciamos y lo guardamos
                 if (!productosMap.containsKey(productId)) {
-                    Map<String, Object> producto = new LinkedHashMap<>();
-                    producto.put("product_id", productId);
-                    producto.put("title", rs.getString("title"));
-                    producto.put("description", rs.getString("description"));
-                    producto.put("category", rs.getString("category"));
-                    producto.put("product_price", rs.getBigDecimal("product_price"));
-                    producto.put("publish_date", rs.getDate("publish_date"));
-                    producto.put("state", rs.getString("state"));
-                    producto.put("seller_id", rs.getInt("seller_id"));
-                    producto.put("images", new ArrayList<String>());
+                    Producto producto = new Producto(
+                            productId,
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getString("category"),
+                            rs.getBigDecimal("product_price"),
+                            rs.getDate("publish_date"),
+                            rs.getString("state"),
+                            rs.getInt("seller_id"),
+                            new ArrayList<>() // Lista de imágenes vacía, se llenará luego
+                    );
+
                     productosMap.put(productId, producto);
                 }
 
+                // Agregar imagen si existe
                 String imageUrl = rs.getString("image_url");
                 if (imageUrl != null) {
-                    ((List<String>) productosMap.get(productId).get("images")).add(imageUrl);
+                    productosMap.get(productId).getImages().add(imageUrl);
                 }
             }
 
