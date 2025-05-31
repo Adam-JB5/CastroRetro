@@ -13,25 +13,18 @@
     font-family: 'Montserrat-Bold';
 }
 
-@keyframes hoverProducto {
-	100% {
-		
-	}
-}
-
 h1 {
     font-family: "Retronoid-Bold";
 }
 
 .product {
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	transition: all 0.3 ease;
 	transform-style: preserve-3d;
-	perspective: 500px;
+	perspective: 1000px;
 }
 
 .product:hover {
-	transform: translateY(-10px) rotateX(5deg);
-	box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+	box-shadow: 0 12px 30px #12132a;
 }
 
 #home-category-console {
@@ -51,6 +44,9 @@ h1 {
 }
 
 .home-category {
-	background-size: cover;
-	background-position: center;
+	background-size: 150%;
+}
+
+.home-category:hover {
+	box-shadow: 1px 1px 100px #2f3267;
 }

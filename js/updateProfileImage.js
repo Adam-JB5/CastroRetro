@@ -1,3 +1,5 @@
+import { mostrarError, mostrarExito } from "./utils.js";
+
 export default function updateProfileImage() {
 
     const usuario = JSON.parse(sessionStorage.getItem("usuario"));

@@ -70,11 +70,11 @@
 
     <main class="flex flex-col items-center justify-center bg-[#1b1d36] space-y-12 p-8">
 
-        <!-- Sección de productos -->
+        <!-- Carrusel ultimos productos -->
         <h1 class="text-white text-7xl">ÚLTIMOS PRODUCTOS</h1>
-        <div class="w-full rounded-xl shadow-lg text-center">
+        <div class="w-full rounded-xl text-center">
 
-            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExample" class="carousel slide bg-transparent" data-bs-ride="carousel">
                 <!-- Indicadores -->
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
@@ -108,31 +108,36 @@
 
         <!-- Cateogorias -->
         <h1 class="text-white text-7xl">CATEGORÍAS</h1>
-        <div class="w-11/12 flex justify-between text-white text-xl font-semibold">
+        <div class="w-10/12 flex justify-between text-white text-xl font-semibold">
 
-            <div id="home-category-console"
-                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <a href="./categoria.html?category=Consola" id="home-category-console"
+                class="home-category w-2/12 bg-transparent flex flex-col justify-around items-center px-6 py-4 rounded-lg">
                 <img class="w-11/12 h-auto" src="./assets/icons/gameboy.svg" alt="">
                 <h3>CONSOLAS</h3>
-            </div>
+            </a>
 
-            <div id="home-category-videogame"
-                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <a href="./categoria.html?category=Juego" id="home-category-videogame"
+                class="home-category w-2/12 bg-transparent flex flex-col justify-around items-center px-6 py-4 rounded-lg">
                 <img class="w-11/12 h-auto" src="./assets/icons/cartridge.svg" alt="">
                 <h3>VIDEOJUEGOS</h3>
-            </div>
+            </a>
 
-            <div id="home-category-accesory"
-                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <a href="./categoria.html?category=Accesorio" id="home-category-accesory"
+                class="home-category w-2/12 bg-transparent flex flex-col justify-around items-center px-6 py-4 rounded-lg">
                 <img class="w-11/12 h-auto" src="./assets/icons/controller.svg" alt="">
                 <h3>ACCESORIOS</h3>
-            </div>
+            </a>
 
-            <div id="home-category-other"
-                class="home-category w-2/12 bg-slate-700 flex flex-col justify-around items-center px-6 py-4 rounded-lg shadow">
+            <a href="./categoria.html?category=Otro" id="home-category-other"
+                class="home-category w-2/12 bg-transparent flex flex-col justify-around items-center px-6 py-4 rounded-lg">
                 <img class="w-11/12 h-auto" src="./assets/icons/other.svg" alt="">
                 <h3>OTROS</h3>
-            </div>
+            </a>
+        </div>
+
+        <h1 class="text-white text-7xl">PRODUCTOS</h1>
+        <div id="div-productos" class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
+
         </div>
 
     </main>
