@@ -5,29 +5,18 @@
  */
 package api;
 
-import DB.DBConnection;
-import DB.UsuarioDML;
-import Modelo.Usuario;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
  * @author adamj
  */
-@WebServlet("/api/update-profile")
-public class updateProfile extends HttpServlet {
+public class product extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,48 +29,15 @@ public class updateProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-
-        String id = request.getParameter("id");
-        String password = request.getParameter("password");
-        String username = request.getParameter("username");
-
-        PrintWriter out = response.getWriter();
-
-        try (Connection conn = DBConnection.getConnection()) {
-            boolean actualizado = false;
-
-            if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
-                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-                actualizado = UsuarioDML.actualizarUsernamePassword(conn, id, username, hashedPassword);
-
-            } else if (username != null && !username.isEmpty()) {
-                actualizado = UsuarioDML.actualizarUsername(conn, id, username);
-
-            } else if (password != null && !password.isEmpty()) {
-                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-                actualizado = UsuarioDML.actualizarPassword(conn, id, hashedPassword);
-            }
-
-            if (actualizado) {
-                Usuario usuarioActualizado = UsuarioDML.obtenerUsuarioPorId(conn, id);
-                String usuarioJson = new Gson().toJson(usuarioActualizado);
-                out.print("{\"success\": true, \"mensaje\": \"Perfil actualizado correctamente\", \"usuario\": " + usuarioJson + "}");
-            } else {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.print("{\"success\": false, \"mensaje\": \"No se actualizaron los datos correctamente\"}");
-            }
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"success\": false, \"mensaje\": \"Error en el servidor: " + e.getMessage() + "\"}");
-        }
-
-        out.flush();
+        response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

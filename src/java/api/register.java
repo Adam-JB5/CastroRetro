@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author adamj
  */
 import javax.servlet.annotation.WebServlet;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/api/register")
 public class register extends HttpServlet {
@@ -46,6 +47,7 @@ public class register extends HttpServlet {
         // Leer parámetros del formulario
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         String username = request.getParameter("username");
 
         PrintWriter out = response.getWriter();
@@ -69,7 +71,7 @@ public class register extends HttpServlet {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, email);
-            stmt.setString(3, password); // Encriptar
+            stmt.setString(3, hashedPassword);
 
             int rowsInserted = stmt.executeUpdate();
 
