@@ -24,9 +24,12 @@ export default function login() {
 			})
 			.then(data => {
 				if (data.success) {
+					const usuario = data.usuario;
 					mostrarExito(data.mensaje);
-					console.log(data.usuario);
-					sessionStorage.setItem("usuario", JSON.stringify(data.usuario));
+					console.log(usuario);
+
+					// Guardar usuario en sessionStorage
+					sessionStorage.setItem("usuario", JSON.stringify(usuario));
 
 					// Verificar que el servidor ya reconoce la sesión
 					setTimeout(() => {
@@ -36,7 +39,12 @@ export default function login() {
 						})
 							.then(res => {
 								if (res.ok) {
-									window.location.href = "./home.html";
+									// Redirigir segun el rol
+									if (usuario.isAdmin) {
+										window.location.href = "./admin.html";
+									} else {
+										window.location.href = "./home.html";
+									}
 								} else {
 									mostrarError(data.mensaje);
 								}

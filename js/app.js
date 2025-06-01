@@ -7,34 +7,42 @@ import updateProfileImage from "./updateProfileImage.js";
 import uploadProduct from "./uploadProduct.js";
 import home from "./home.js";
 
-    if (window.location.pathname.endsWith("/register.html")) {
-        document.addEventListener("DOMContentLoaded", () => {
-        register();})
-    }
-    
-    if (window.location.pathname.endsWith("/login.html")) {
-        document.addEventListener("DOMContentLoaded", () => {
-        login();})
-    }
+if (window.location.pathname.endsWith("/register.html")) {
+    document.addEventListener("DOMContentLoaded", () => {
+        register();
+    })
+}
 
-    if (window.location.pathname.endsWith("/home.html") || window.location.pathname.endsWith("/profile.html") || window.location.pathname.endsWith("/upload-product.html")) {
-        console.log("uservvv");
-        userValidation();
-        console.log("entro");
+if (window.location.pathname.endsWith("/login.html")) {
+    document.addEventListener("DOMContentLoaded", () => {
+        login();
+    })
+}
 
-        header();
-        
-    }
+const rutasProtegidas = [
+    "/home.html",
+    "/profile.html",
+    "/upload-product.html",
+    "/product.html",
+    "/admin.html"
+];
 
-    if (window.location.pathname.endsWith("/home.html")) {
-        home();
-    }
+if (rutasProtegidas.some(ruta => window.location.pathname.endsWith(ruta))) {
+    console.log("uservvv");
+    userValidation();
+    console.log("entro");
+    header();
+}
 
-    if (window.location.pathname.endsWith("/profile.html")) {
-        updateProfile();
-        updateProfileImage();
-    }
+if (window.location.pathname.endsWith("/home.html")) {
+    home();
+}
 
-    if (window.location.pathname.endsWith("/upload-product.html")) {
-        uploadProduct();
-    }
+if (window.location.pathname.endsWith("/profile.html")) {
+    updateProfile();
+    updateProfileImage();
+}
+
+if (window.location.pathname.endsWith("/upload-product.html")) {
+    uploadProduct();
+}

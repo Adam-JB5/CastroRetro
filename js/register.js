@@ -1,3 +1,4 @@
+import { mostrarError, mostrarExito } from "./utils.js";
 
 export default function register() {
     const formulario = document.getElementById("register-form");

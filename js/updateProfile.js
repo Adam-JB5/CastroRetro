@@ -14,6 +14,8 @@ export default function updateProfile() {
 
         let nuevoUsername = username.value.trim();
         let password = document.getElementById("profile-password").value.trim();
+        let confirmPassword = document.getElementById("profile-confirm-password").value.trim();
+
 
         // Validar si hubo algun cambio
         const usernameCambio = nuevoUsername !== "" && nuevoUsername !== usuario.username;
@@ -29,6 +31,11 @@ export default function updateProfile() {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
             if (!passwordRegex.test(password)) {
                 mostrarError("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                mostrarError("Las contraseñas no coinciden");
                 return;
             }
         }

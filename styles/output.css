@@ -667,6 +667,14 @@ video {
   margin-top: 1rem;
 }
 
+.ms-10 {
+  margin-inline-start: 2.5rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
 .line-clamp-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -706,8 +714,8 @@ video {
   height: 3rem;
 }
 
-.h-16 {
-  height: 4rem;
+.h-14 {
+  height: 3.5rem;
 }
 
 .h-20 {
@@ -1029,11 +1037,6 @@ video {
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }
 
-.bg-slate-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -1041,6 +1044,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#4caf50\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(76 175 80 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-30 {
@@ -1247,12 +1255,6 @@ video {
   opacity: 0;
 }
 
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-inner {
   --tw-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: inset 0 2px 4px 0 var(--tw-shadow-color);
@@ -1453,6 +1455,30 @@ video {
 .hover\:bg-green-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-\[\#3e8e41\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(62 142 65 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-\[\#ffffffdd\]:hover {
+  background-color: #ffffffdd;
+}
+
+.hover\:bg-\[\#171616\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(23 22 22 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-\[\#ffffff\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-\[\#bb3f3f\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 63 63 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-black:hover {
