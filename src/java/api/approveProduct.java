@@ -6,14 +6,10 @@
 package api;
 
 import DB.DBConnection;
-import Modelo.Producto;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamj
  */
-@WebServlet("/api/product")
-public class product extends HttpServlet {
+@WebServlet("/api/approve-products")
+public class approveProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,57 +44,28 @@ public class product extends HttpServlet {
 
         String idParam = request.getParameter("id");
         int productId = Integer.parseInt(idParam);
-
+        
         PrintWriter out = response.getWriter();
 
         try (Connection conn = DBConnection.getConnection()) {
-            String query = "SELECT p.product_id, p.title, p.description, p.category, p.product_price, p.publish_date, p.state, p.seller_id, i.image_url "
-                    + "FROM productos p LEFT JOIN imagenes_producto i ON p.product_id = i.product_id "
-                    + "WHERE p.product_id = ?";
+            String sql = "UPDATE productos SET state = ? WHERE product_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "Disponible");
+            stmt.setInt(2, productId);
 
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, productId);
+            int filasActualizadas = stmt.executeUpdate();
 
-            ResultSet rs = stmt.executeQuery();
-
-            Producto producto = null;
-
-            while (rs.next()) {
-                if (producto == null) {
-                    producto = new Producto(
-                            rs.getInt("product_id"),
-                            rs.getString("title"),
-                            rs.getString("description"),
-                            rs.getString("category"),
-                            rs.getBigDecimal("product_price"),
-                            rs.getDate("publish_date"),
-                            rs.getString("state"),
-                            rs.getInt("seller_id"),
-                            new ArrayList<>()
-                    );
-                }
-
-                String imageUrl = rs.getString("image_url");
-                if (imageUrl != null) {
-                    producto.getImages().add(imageUrl);
-                }
-            }
-
-            if (producto == null) {
+            if (filasActualizadas > 0) {
+                out.print("{\"success\": true, \"mensaje\": \"Producto aprobado\"}");
+            } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 out.print("{\"success\": false, \"mensaje\": \"Producto no encontrado\"}");
-            } else {
-                String json = new Gson().toJson(producto);
-                out.print(json);
             }
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.print("{\"success\": false, \"mensaje\": \"Error en el servidor: " + e.getMessage() + "\"}");
         }
-
-        out.flush();
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

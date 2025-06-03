@@ -53,6 +53,7 @@ public class products extends HttpServlet {
         String categoria = request.getParameter("categoria");
         String estado = request.getParameter("estado");
 
+        System.out.println("categoria: " + categoria);
         PrintWriter out = response.getWriter();
 
         try (Connection conn = DBConnection.getConnection()) {
