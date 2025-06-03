@@ -6,6 +6,8 @@ import updateProfile from "./updateProfile.js";
 import updateProfileImage from "./updateProfileImage.js";
 import uploadProduct from "./uploadProduct.js";
 import home from "./home.js";
+import admin from "./admin.js";
+import product from "./product.js";
 
 if (window.location.pathname.endsWith("/register.html")) {
     document.addEventListener("DOMContentLoaded", () => {
@@ -28,9 +30,7 @@ const rutasProtegidas = [
 ];
 
 if (rutasProtegidas.some(ruta => window.location.pathname.endsWith(ruta))) {
-    console.log("uservvv");
     userValidation();
-    console.log("entro");
     header();
 }
 
@@ -45,4 +45,12 @@ if (window.location.pathname.endsWith("/profile.html")) {
 
 if (window.location.pathname.endsWith("/upload-product.html")) {
     uploadProduct();
+}
+
+if (window.location.pathname.endsWith("/product.html")) {
+    product();
+}
+
+if (window.location.pathname.endsWith("/admin.html")) {
+    admin();
 }

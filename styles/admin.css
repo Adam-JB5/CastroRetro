@@ -1,0 +1,18 @@
+@font-face {
+    src: url("../assets/fonts/RetronoidBold.woff2");
+    font-family: 'Retronoid-Bold';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratRegular.woff2");
+    font-family: 'Montserrat';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratBold.woff2");
+    font-family: 'Montserrat-Bold';
+}
+
+h1 {
+    font-family: "Retronoid-Bold";
+}

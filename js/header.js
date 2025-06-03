@@ -13,7 +13,11 @@ export default function header() {
 
     username.innerText = usuario.username;
     role.innerText = usuario.isAdmin ? "Administrador" : "Usuario";
-    let imageUrl = `http://127.0.0.1:8080/CastroRetro/${usuario.profileImage}`;
+    
+    let imageUrl = usuario.profileImage
+        ? `http://127.0.0.1:8080/CastroRetro/${usuario.profileImage}`
+        : './assets/icons/profilePlaceholder.svg';
+
     profileImage.src = imageUrl;
 
     function esAdmin() {

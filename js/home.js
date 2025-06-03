@@ -1,7 +1,8 @@
+import { mostrarError, mostrarExito } from "./utils.js";
 
 export default function home() {
 
-	fetch('http://127.0.0.1:8080/CastroRetro/api/products', {
+	fetch('http://127.0.0.1:8080/CastroRetro/api/products?estado=Disponible', {
 		credentials: 'include'
 	})
 		.then(res => res.json())
@@ -11,6 +12,10 @@ export default function home() {
 			crearProductos(data);
 			animacionProductos();
 			animacionCategorias();
+		})
+		.catch(err => {
+			console.error(err);
+			mostrarError("Ocurrió un error al recoger los productos");
 		});
 
 	function crearUltimosProductos(datos) {
@@ -56,7 +61,7 @@ export default function home() {
 	}
 
 	function crearProductos(datos) {
-		const divProductos = document.getElementById("div-productos");
+		const divProductos = document.getElementById("home-div-productos");
 
 		datos.forEach((producto) => {
 			const a = document.createElement("a");
