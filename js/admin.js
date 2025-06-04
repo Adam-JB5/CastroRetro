@@ -45,6 +45,7 @@ export default function admin() {
 						<p class="text-white mb-1"><strong>Descripción:</strong> ${producto.description}</p>
 						<p class="text-white mb-1"><strong>Categoría:</strong> ${producto.category}</p>
 						<p class="text-white mb-1"><strong>Precio:</strong> ${producto.productPrice} €</p>
+                        <p class="text-white mb-1"><strong>Fecha publicación:</strong> ${producto.publishDate}</p>
 					</div>
 					<div class="flex items-center">
 						<button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all aprobar-btn">
