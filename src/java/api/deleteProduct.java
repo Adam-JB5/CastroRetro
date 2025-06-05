@@ -8,7 +8,6 @@ package api;
 import DB.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamj
  */
-@WebServlet("/api/comprar")
-public class buyProduct extends HttpServlet {
+@WebServlet("/api/delete-products")
+public class deleteProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,49 +42,29 @@ public class buyProduct extends HttpServlet {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
-        String userIdParam = request.getParameter("userId");
-        String productIdParam = request.getParameter("productId");
-        String productPriceParam = request.getParameter("productPrice");
+        String idParam = request.getParameter("id");
+        int productId = Integer.parseInt(idParam);
 
         PrintWriter out = response.getWriter();
 
-        try {
-            int userId = Integer.parseInt(userIdParam);
-            int productId = Integer.parseInt(productIdParam);
-            BigDecimal precio = new BigDecimal(productPriceParam);
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "DELETE FROM productos WHERE product_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, productId);
 
-            try (Connection conn = DBConnection.getConnection()) {
-                conn.setAutoCommit(false);
+            int filasAfectadas = stmt.executeUpdate();
 
-                try {
-                    // Insertar la compra
-                    String insertSql = "INSERT INTO compras (purchase_price, buyer_id, product_id) VALUES (?, ?, ?)";
-                    PreparedStatement insertStmt = conn.prepareStatement(insertSql);
-                    insertStmt.setBigDecimal(1, precio);
-                    insertStmt.setInt(2, userId);
-                    insertStmt.setInt(3, productId);
-                    insertStmt.executeUpdate();
-
-                    // Actualizar estado del producto a 'Vendido'
-                    String updateSql = "UPDATE productos SET state = 'Vendido' WHERE product_id = ?";
-                    PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-                    updateStmt.setInt(1, productId);
-                    updateStmt.executeUpdate();
-
-                    conn.commit();
-                    out.print("{\"success\": true, \"mensaje\": \"Compra registrada exitosamente\"}");
-
-                } catch (Exception e) {
-                    conn.rollback(); //Revierte en caso de fallo
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    out.print("{\"success\": false, \"mensaje\": \"Error al registrar la compra: " + e.getMessage() + "\"}");
-                }
-
+            if (filasAfectadas > 0) {
+                out.print("{\"success\": true, \"mensaje\": \"Producto eliminado correctamente\"}");
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print("{\"success\": false, \"mensaje\": \"Producto no encontrado\"}");
             }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"success\": false, \"mensaje\": \"Error general: " + e.getMessage() + "\"}");
+            out.print("{\"success\": false, \"mensaje\": \"Error del servidor: " + e.getMessage() + "\"}");
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

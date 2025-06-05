@@ -52,6 +52,7 @@ public class products extends HttpServlet {
 
         String categoria = request.getParameter("categoria");
         String estado = request.getParameter("estado");
+        String usuarioIdParam = request.getParameter("userId");
 
         System.out.println("categoria: " + categoria);
         PrintWriter out = response.getWriter();
@@ -74,6 +75,11 @@ public class products extends HttpServlet {
             if (estado != null && !estado.isEmpty()) {
                 condiciones.add("p.state = ?");
                 parametros.add(estado);
+            }
+
+            if (usuarioIdParam != null && !usuarioIdParam.isEmpty()) {
+                condiciones.add("p.seller_id = ?");
+                parametros.add(Integer.parseInt(usuarioIdParam));
             }
 
             if (!condiciones.isEmpty()) {

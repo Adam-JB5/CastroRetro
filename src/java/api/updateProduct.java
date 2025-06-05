@@ -6,12 +6,12 @@
 package api;
 
 import DB.DBConnection;
+import DB.ProductoDML;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamj
  */
-@WebServlet("/api/comprar")
-public class buyProduct extends HttpServlet {
+@WebServlet("/api/update-products")
+@MultipartConfig
+public class updateProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,56 +36,64 @@ public class buyProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+
         response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-
-        String userIdParam = request.getParameter("userId");
-        String productIdParam = request.getParameter("productId");
-        String productPriceParam = request.getParameter("productPrice");
 
         PrintWriter out = response.getWriter();
 
         try {
-            int userId = Integer.parseInt(userIdParam);
-            int productId = Integer.parseInt(productIdParam);
-            BigDecimal precio = new BigDecimal(productPriceParam);
+            // Obtener datos del formulario
+            String productIdStr = request.getParameter("id");
+            String categoria = request.getParameter("categoria");
+            String titulo = request.getParameter("titulo");
+            String descripcion = request.getParameter("descripcion");
+            String precioStr = request.getParameter("precio");
 
-            try (Connection conn = DBConnection.getConnection()) {
-                conn.setAutoCommit(false);
-
-                try {
-                    // Insertar la compra
-                    String insertSql = "INSERT INTO compras (purchase_price, buyer_id, product_id) VALUES (?, ?, ?)";
-                    PreparedStatement insertStmt = conn.prepareStatement(insertSql);
-                    insertStmt.setBigDecimal(1, precio);
-                    insertStmt.setInt(2, userId);
-                    insertStmt.setInt(3, productId);
-                    insertStmt.executeUpdate();
-
-                    // Actualizar estado del producto a 'Vendido'
-                    String updateSql = "UPDATE productos SET state = 'Vendido' WHERE product_id = ?";
-                    PreparedStatement updateStmt = conn.prepareStatement(updateSql);
-                    updateStmt.setInt(1, productId);
-                    updateStmt.executeUpdate();
-
-                    conn.commit();
-                    out.print("{\"success\": true, \"mensaje\": \"Compra registrada exitosamente\"}");
-
-                } catch (Exception e) {
-                    conn.rollback(); //Revierte en caso de fallo
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    out.print("{\"success\": false, \"mensaje\": \"Error al registrar la compra: " + e.getMessage() + "\"}");
-                }
-
+            // Validar datos obligatorios
+            if (productIdStr == null || categoria == null || titulo == null || descripcion == null
+                    || precioStr == null || categoria.isEmpty() || titulo.isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                out.print("{\"success\": false, \"mensaje\": \"Faltan datos obligatorios\"}");
+                return;
             }
+
+            int productId;
+            try {
+                productId = Integer.parseInt(productIdStr);
+            } catch (NumberFormatException e) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                out.print("{\"success\": false, \"mensaje\": \"ID de producto inválido\"}");
+                return;
+            }
+
+            float precio;
+            try {
+                precio = Float.parseFloat(precioStr);
+            } catch (NumberFormatException e) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                out.print("{\"success\": false, \"mensaje\": \"Precio invalido\"}");
+                return;
+            }
+
+            // Actualizar en base de datos
+            try (Connection conn = DBConnection.getConnection()) {
+                boolean actualizado = ProductoDML.actualizarProducto(conn, productId, categoria, titulo, descripcion, precio);
+
+                if (actualizado) {
+                    out.print("{\"success\": true, \"mensaje\": \"Producto actualizado correctamente\"}");
+                } else {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    out.print("{\"success\": false, \"mensaje\": \"Error al actualizar el producto en la base de datos\"}");
+                }
+            }
+
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"success\": false, \"mensaje\": \"Error general: " + e.getMessage() + "\"}");
+            out.print("{\"success\": false, \"mensaje\": \"Error del servidor: " + e.getMessage() + "\"}");
         }
     }
 

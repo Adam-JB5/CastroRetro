@@ -67,9 +67,46 @@ public class ProductoDML {
 
         } finally {
             try {
-                if (generatedKeys != null) generatedKeys.close();
-                if (psProducto != null) psProducto.close();
-                if (psImagen != null) psImagen.close();
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (psProducto != null) {
+                    psProducto.close();
+                }
+                if (psImagen != null) {
+                    psImagen.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean actualizarProducto(Connection conn, int productId, String categoria, String titulo, String descripcion, float precio) {
+        PreparedStatement ps = null;
+
+        try {
+            String updateSQL = "UPDATE productos SET title = ?, description = ?, category = ?, product_price = ? WHERE product_id = ?";
+            ps = conn.prepareStatement(updateSQL);
+
+            ps.setString(1, titulo);
+            ps.setString(2, descripcion);
+            ps.setString(3, categoria);
+            ps.setFloat(4, precio);
+            ps.setInt(5, productId);
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
