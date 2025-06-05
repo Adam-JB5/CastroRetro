@@ -8,6 +8,8 @@ import uploadProduct from "./uploadProduct.js";
 import home from "./home.js";
 import admin from "./admin.js";
 import product from "./product.js";
+import category from "./category.js";
+import myProducts from "./myProducts.js";
 
 if (window.location.pathname.endsWith("/register.html")) {
     document.addEventListener("DOMContentLoaded", () => {
@@ -26,7 +28,9 @@ const rutasProtegidas = [
     "/profile.html",
     "/upload-product.html",
     "/product.html",
-    "/admin.html"
+    "/admin.html",
+    "/category.html",
+    "/my-products.html"
 ];
 
 if (rutasProtegidas.some(ruta => window.location.pathname.endsWith(ruta))) {
@@ -49,6 +53,14 @@ if (window.location.pathname.endsWith("/upload-product.html")) {
 
 if (window.location.pathname.endsWith("/product.html")) {
     product();
+}
+
+if (window.location.pathname.endsWith("/my-products.html")) {
+    myProducts();
+}
+
+if (window.location.pathname.endsWith("/category.html")) {
+    category();
 }
 
 if (window.location.pathname.endsWith("/admin.html")) {

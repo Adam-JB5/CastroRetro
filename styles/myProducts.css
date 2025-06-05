@@ -1,0 +1,53 @@
+@font-face {
+    src: url("../assets/fonts/Retronoid.woff2");
+    font-family: 'Retronoid';
+}
+
+@font-face {
+    src: url("../assets/fonts/RetronoidBold.woff2");
+    font-family: 'Retronoid-Bold';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratRegular.woff2");
+    font-family: 'Montserrat';
+}
+
+@font-face {
+    src: url("../assets/fonts/MontserratBold.woff2");
+    font-family: 'Montserrat-Bold';
+}
+
+h2 {
+    font-family: "Retronoid-Bold";
+}
+
+input[type="text"], textarea, input[type="number"], button {
+    font-family: "Montserrat";
+}
+
+.tab-content {
+    display: none; 
+}
+
+.tab-active {
+    display: block; 
+}
+
+.tab-button {
+    background-color: #2f2f88;
+    font-family: "Retronoid";
+}
+
+.tab-button:hover {
+    background-color: #1d1d66;
+}
+
+.tab-button-active {
+    background-color: #ff0000;
+    color: white;
+}
+
+.tab-button-active:hover {
+    background-color: #c00000;
+}

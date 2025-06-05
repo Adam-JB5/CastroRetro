@@ -83,7 +83,7 @@ export default function product() {
 
         // Solo mostrar y activar botón PayPal si el producto está disponible
         if (producto.state === "Disponible") {
-            const datos = { userId: usuario.userId, productId: producto.productId };
+            const datos = { userId: usuario.userId, productId: producto.productId, productPrice: producto.productPrice };
             paypal.Buttons({
                 createOrder: function (data, actions) {
                     return actions.order.create({
@@ -114,6 +114,9 @@ export default function product() {
                             .then(data => {
                                 console.log(data);
                                 mostrarExito("Compra completada correctamente 🎉");
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 3000);
                             })
                             .catch(err => {
                                 console.error(err);
@@ -135,9 +138,11 @@ export default function product() {
             const container = document.getElementById('paypal-button-container');
             container.innerHTML = `
                 <button disabled class="w-full px-6 py-3 bg-gray-500 text-black font-bold rounded-xl cursor-not-allowed opacity-50">
-                    PRODUCTO NO DISPONIBLE
+                    PRODUCTO VENDIDO
                 </button>
             `;
+
+
         }
 
     }

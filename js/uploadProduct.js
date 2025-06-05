@@ -268,18 +268,9 @@ export default function uploadProduct() {
                     mostrarExito(data.mensaje || "Producto creado correctamente");
 
                     setTimeout(() => {
-                        fetch("http://127.0.0.1:8080/CastroRetro/api/validate-session", {
-                            method: "GET",
-                            credentials: "include"
-                        })
-                            .then(res => {
-                                if (res.ok) {
-                                    window.location.href = window.location.pathname;
-                                } else {
-                                    mostrarError(data.mensaje);
-                                }
-                            });
-                    }, 500);
+                        window.location.href = window.location.pathname;
+                    }, 2500);
+                    
                 } else {
                     mostrarError(data.mensaje || "Hubo un problema al crear el producto");
                 }
