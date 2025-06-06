@@ -86,7 +86,7 @@ public class ProductoDML {
         PreparedStatement ps = null;
 
         try {
-            String updateSQL = "UPDATE productos SET title = ?, description = ?, category = ?, product_price = ? WHERE product_id = ?";
+            String updateSQL = "UPDATE productos SET title = ?, description = ?, category = ?, product_price = ?, state = 'Pendiente de aprobacion' WHERE product_id = ?";
             ps = conn.prepareStatement(updateSQL);
 
             ps.setString(1, titulo);

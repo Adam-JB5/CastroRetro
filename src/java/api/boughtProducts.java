@@ -6,15 +6,18 @@
 package api;
 
 import DB.DBConnection;
-import DB.UsuarioDML;
-import Modelo.Usuario;
+import Modelo.Producto;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamj
  */
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-
-@WebServlet("/api/login")
-public class login extends HttpServlet {
+@WebServlet("/api/bought-products")
+public class boughtProducts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,6 +40,7 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
@@ -48,28 +48,57 @@ public class login extends HttpServlet {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
-        // Leer parámetros del formulario
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
         PrintWriter out = response.getWriter();
 
+        String userIdParam = request.getParameter("userId");
+
+        if (userIdParam == null || userIdParam.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            out.print("{\"success\": false, \"mensaje\": \"Parámetro 'userId' requerido.\"}");
+            return;
+        }
+
         try (Connection conn = DBConnection.getConnection()) {
-            Usuario usuario = UsuarioDML.obtenerUsuarioLogin(conn, email, password);
 
-            if (usuario != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
+            String query = "SELECT p.product_id, p.title, p.description, p.category, p.product_price, p.publish_date, p.state, p.seller_id, i.image_url "
+                    + "FROM compras c "
+                    + "JOIN productos p ON c.product_id = p.product_id "
+                    + "LEFT JOIN imagenes_producto i ON p.product_id = i.product_id "
+                    + "WHERE c.buyer_id = ?";
 
-                response.setStatus(HttpServletResponse.SC_OK);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, Integer.parseInt(userIdParam));
 
-                String usuarioJson = new Gson().toJson(usuario);
-                out.print("{\"success\": true, \"mensaje\": \"Inicio de sesión exitoso\", \"usuario\": " + usuarioJson + "}");
+            ResultSet rs = stmt.executeQuery();
 
-            } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                out.print("{\"success\": false, \"mensaje\": \"Credenciales incorrectas\"}");
+            Map<Integer, Producto> productosMap = new LinkedHashMap<>();
+
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+
+                if (!productosMap.containsKey(productId)) {
+                    Producto producto = new Producto(
+                            productId,
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getString("category"),
+                            rs.getBigDecimal("product_price"),
+                            rs.getDate("publish_date"),
+                            rs.getString("state"),
+                            rs.getInt("seller_id"),
+                            new ArrayList<>()
+                    );
+                    productosMap.put(productId, producto);
+                }
+
+                String imageUrl = rs.getString("image_url");
+                if (imageUrl != null) {
+                    productosMap.get(productId).getImages().add(imageUrl);
+                }
             }
+
+            String json = new Gson().toJson(new ArrayList<>(productosMap.values()));
+            out.print(json);
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -77,6 +106,7 @@ public class login extends HttpServlet {
         }
 
         out.flush();
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

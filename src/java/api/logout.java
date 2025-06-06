@@ -5,30 +5,21 @@
  */
 package api;
 
-import DB.DBConnection;
-import DB.UsuarioDML;
-import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import com.google.gson.Gson;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author adamj
  */
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-
-@WebServlet("/api/login")
-public class login extends HttpServlet {
+@WebServlet("/api/logout")
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,37 +37,14 @@ public class login extends HttpServlet {
         response.setContentType("application/json");
         response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 
-        // Leer parámetros del formulario
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        PrintWriter out = response.getWriter();
-
-        try (Connection conn = DBConnection.getConnection()) {
-            Usuario usuario = UsuarioDML.obtenerUsuarioLogin(conn, email, password);
-
-            if (usuario != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario);
-
-                response.setStatus(HttpServletResponse.SC_OK);
-
-                String usuarioJson = new Gson().toJson(usuario);
-                out.print("{\"success\": true, \"mensaje\": \"Inicio de sesión exitoso\", \"usuario\": " + usuarioJson + "}");
-
-            } else {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                out.print("{\"success\": false, \"mensaje\": \"Credenciales incorrectas\"}");
-            }
-
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"success\": false, \"mensaje\": \"Error en el servidor: " + e.getMessage() + "\"}");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); 
         }
 
-        out.flush();
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().print("{\"success\": true, \"mensaje\": \"Sesión cerrada\"}");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
