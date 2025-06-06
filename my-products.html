@@ -16,14 +16,14 @@
     <script type="module" src="./js/app.js" defer></script>
 </head>
 
-<body>
+<body class="bg-[#1b1d36]">
     <header class="w-full bg-[#1e1e4a] text-white">
         <div class="container mx-auto px-4 pb-4 pt-2">
 
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
 
                 <!-- Botones -->
-                <div id="header-buttons-div" class="flex space-x-4">
+                <div id="header-buttons-div" class="flex items-center space-x-4">
                     <a href="./home.html"
                         class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         INICIO
@@ -40,7 +40,14 @@
                         class="bg-[#ffb8de] hover:bg-[#d27baa] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         MIS PRODUCTOS
                     </a>
+
                 </div>
+
+                <!-- Boton cerrar sesion -->
+                <a id="header-logout-button"
+                    class="hover:bg-[#ff0000] border-2 border-red-600 ml-auto transition-colors px-4 py-1.5 font-medium rounded-sm">
+                    CERRAR SESIÓN
+                </a>
 
                 <!-- Info. usuario -->
                 <div class="flex items-center space-x-3">
@@ -66,28 +73,35 @@
     </header>
 
     <!-- Contenido principal con pestañas -->
-    <main class="flex-1 h-max w-full p-6 bg-[#1b1d36] text-white">
+    <main class="flex-1 h-full w-full p-6 bg-[#1b1d36] text-white">
         <div class="container mx-auto">
             <div class="flex justify-around gap-4 mb-6">
-                <button id="tab-comprados"
-                    class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS COMPRADOS</button>
-                <button id="tab-vendidos"
-                    class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS VENDIDOS</button>
+                <button id="tab-comprados" class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS
+                    COMPRADOS</button>
+                <button id="tab-vendidos" class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS
+                    VENDIDOS</button>
             </div>
 
             <div class="tab-content" id="my-products-comprados">
-                <div class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
+                <h2 class="text-3xl text-white">TUS PRODUCTOS COMPRADOS</h2>
+                <div id="contenido-compras" class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
 
                 </div>
             </div>
 
             <div class="tab-content" id="my-products-vendidos">
-                <h2 class="text-3xl text-white">TUS PRODUCTOS EN VENTA/VENDIDOS</h2>
-                <div>
+                <div class="flex items-center mb-3">
+                    <h2 class="text-3xl text-white mr-2">TUS PRODUCTOS EN VENTA/VENDIDOS</h2>
+                    <p class="text-sm text-gray-500">Ten en cuenta que tendrás que esperar a que se vuelva a aprobar tu
+                        producto en
+                        caso de cambios</p>
+                </div>
+                <div id="contenido-ventas">
 
                 </div>
             </div>
         </div>
     </main>
 </body>
+
 </html>

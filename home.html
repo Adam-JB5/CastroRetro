@@ -30,7 +30,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
 
                 <!-- Botones -->
-                <div id="header-buttons-div" class="flex space-x-4">
+                <div id="header-buttons-div" class="flex items-center space-x-4">
                     <a href="./home.html"
                         class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         INICIO
@@ -47,7 +47,14 @@
                         class="bg-[#ffb8de] hover:bg-[#d27baa] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         MIS PRODUCTOS
                     </a>
+
                 </div>
+
+                <!-- Boton cerrar sesion -->
+                <a id="header-logout-button"
+                    class="hover:bg-[#ff0000] border-2 border-red-600 ml-auto transition-colors px-4 py-1.5 font-medium rounded-sm">
+                    CERRAR SESIÓN
+                </a>
 
                 <!-- Info. usuario -->
                 <div class="flex items-center space-x-3">
@@ -140,7 +147,8 @@
         </div>
 
         <h1 class="text-white text-7xl">PRODUCTOS</h1>
-        <div id="home-div-productos" class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
+        <div id="home-div-productos"
+            class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
         </div>
 
     </main>

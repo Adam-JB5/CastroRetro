@@ -32,30 +32,68 @@ export default function myProducts() {
     const userId = usuario.userId;
 
 
-    fetch(`http://127.0.0.1:8080/CastroRetro/api/products?userId=${userId}`, {
-        credentials: 'include'
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            todosProductos(data);
+    function ventas() {
+
+        fetch(`http://127.0.0.1:8080/CastroRetro/api/products?userId=${userId}`, {
+            credentials: 'include'
         })
-        .catch(err => {
-            console.error(err);
-            mostrarError("Ocurrió un error al recoger los productos");
-        });
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                todosProductos(data);
+            })
+            .catch(err => {
+                console.error(err);
+                mostrarError("Ocurrió un error al recoger los productos");
+            });
 
-    function todosProductos(data) {
-        const divProductos = document.querySelector("#my-products-vendidos > div");
+        function todosProductos(data) {
+            const divProductos = document.querySelector("#contenido-ventas");
 
-        data.forEach(producto => {
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'flex flex-col sm:flex-row items-start gap-6 bg-transparent text-white shadow-md p-4 mb-4 rounded-2xl border';
 
-            const imagenes = producto.images.map(url => `
+            if (!data || data.length === 0) {
+                const mensaje = document.createElement('p');
+                mensaje.textContent = "NO HAS PUBLICADO NINGÚN PRODUCTO";
+                mensaje.className = "text-center text-gray-500 text-4xl pt-32";
+                divProductos.appendChild(mensaje);
+                return;
+            }
+
+
+
+            data.forEach(producto => {
+
+                let estadoHTML = { parrafo: "", color: "" };
+
+                switch (producto.state) {
+                    case "Pendiente de aprobacion":
+                        estadoHTML.parrafo = '<p class="text-red-400 text-xl font-black">Pendiente de aprobación</p>';
+                        estadoHTML.color = "#f8717140";
+                        break;
+                    case "Vendido":
+                        estadoHTML.parrafo = '<p class="text-yellow-400 text-xl font-black">Vendido</p>';
+                        estadoHTML.color = "#facc1550";
+                        break;
+                    case "Disponible":
+                        estadoHTML.parrafo = '<p class="text-green-500 text-xl font-black">Disponible</p>';
+                        estadoHTML.color = "#22c55e50";
+                        break;
+                    default:
+                        estadoHTML.parrafo = '<p class="text-gray-400">🔍 Estado no especificado</p>';
+                        break;
+                }
+
+
+                console.log(estadoHTML.color);
+                const tarjeta = document.createElement('div');
+                tarjeta.className = `flex flex-col sm:flex-row items-start gap-6 bg-transparent text-white shadow-md p-4 mb-4 rounded-2xl border`;
+                tarjeta.style.backgroundColor = `${estadoHTML.color}`;
+
+                const imagenes = producto.images.map(url => `
             <img src="http://127.0.0.1:8080/CastroRetro/${url}" alt="imagen" class="w-full h-32 object-cover rounded-md">`).join('');
 
-            tarjeta.innerHTML = `
+
+                tarjeta.innerHTML = `
                 <div class="grid grid-cols-2 gap-2 w-64 flex-shrink-0">
                     ${imagenes}
                 </div>
@@ -83,6 +121,8 @@ export default function myProducts() {
                     </div>
 
                     <p class="text-white mb-1"><strong>Fecha publicación:</strong> ${producto.publishDate}</p>
+                    
+                    ${estadoHTML.parrafo}
                 </form>
                 <div class="flex flex-col gap-2 h-full justify-center items-end">
                     <button type="submit" class="guardar-btn bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-all">
@@ -94,119 +134,179 @@ export default function myProducts() {
                 </div>
             `;
 
-            /* Evento de eliminacion */
-            tarjeta.querySelector('.eliminar-btn').addEventListener('click', () => {
-                const confirmar = confirm(`¿Estás seguro de que deseas eliminar "${producto.title}"?`);
-                if (!confirmar) return;
+                /* Evento de eliminacion */
+                tarjeta.querySelector('.eliminar-btn').addEventListener('click', () => {
+                    const confirmar = confirm(`¿Estás seguro de que deseas eliminar "${producto.title}"?`);
+                    if (!confirmar) return;
 
-                fetch(`http://127.0.0.1:8080/CastroRetro/api/delete-products?id=${producto.productId}`, {
-                    method: 'POST',
-                    credentials: 'include'
-                })
-                    .then(response => {
-                        if (!response.ok) throw new Error('Error al eliminar');
-                        mostrarExito(`Producto "${producto.title}" eliminado`, 2000);
-                        tarjeta.remove();
+                    fetch(`http://127.0.0.1:8080/CastroRetro/api/delete-products?id=${producto.productId}`, {
+                        method: 'POST',
+                        credentials: 'include'
                     })
-                    .catch(error => {
-                        console.error(error);
-                        mostrarError('No se pudo eliminar el producto.');
-                    });
+                        .then(response => {
+                            if (!response.ok) throw new Error('Error al eliminar');
+                            mostrarExito(`Producto "${producto.title}" eliminado`, 2000);
+                            tarjeta.remove();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            mostrarError('No se pudo eliminar el producto.');
+                        });
+                });
+
+                /* Evento de actualizacion de datos */
+                tarjeta.querySelector('.guardar-btn').addEventListener("click", (e) => {
+                    e.preventDefault();
+
+                    const datos = recogerDatosFormulario();
+                    if (!datos) return;
+
+
+                    const formData = new FormData();
+                    formData.append("categoria", datos.categoria);
+                    formData.append("titulo", datos.titulo);
+                    formData.append("descripcion", datos.descripcion);
+                    formData.append("precio", datos.precio.toString()); // Asegurar que sea string
+
+                    fetch(`http://127.0.0.1:8080/CastroRetro/api/update-products?id=${producto.productId}`, {
+                        method: 'POST',
+                        body: formData,
+                        credentials: 'include'
+                    })
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Response data:', data);
+                            if (data.success) {
+                                mostrarExito(`Producto "${producto.title}" modificado`, 2000);
+
+                            } else {
+                                mostrarError(data.mensaje || 'Error al actualizar el producto');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error completo:', error);
+                            mostrarError('No se pudo modificar el producto.');
+                        });
+                });
+
+
+
+                divProductos.appendChild(tarjeta);
+
+                function recogerDatosFormulario() {
+
+                    const titulo = tarjeta.querySelector(".my-products-title")?.value.trim();
+                    const descripcion = tarjeta.querySelector(".my-products-description")?.value.trim();
+                    const categoria = tarjeta.querySelector(".my-products-category")?.value;
+                    const precio = parseFloat(tarjeta.querySelector(".my-products-price")?.value);
+
+                    // Validaciones específicas
+                    if (!categoria) {
+                        mostrarError("Debe seleccionar una categoría");
+                        return null;
+                    }
+
+                    if (!titulo) {
+                        mostrarError("Debe ingresar un título para el producto");
+                        return null;
+                    }
+
+                    if (!descripcion) {
+                        mostrarError("Debe escribir una descripción del producto");
+                        return null;
+                    }
+
+                    if (!precio || isNaN(precio) || precio <= 0) {
+                        mostrarError("Debe ingresar un precio válido");
+                        return null;
+                    }
+
+                    if (!categoria || !titulo || !descripcion || isNaN(precio)) {
+                        mostrarError("Faltan datos por completar");
+                        return null;
+                    }
+                    console.log(categoria);
+                    console.log(titulo);
+                    console.log(descripcion);
+                    console.log(precio);
+
+                    const datos = {
+                        categoria,
+                        titulo,
+                        descripcion,
+                        precio
+                    };
+                    return datos;
+                }
             });
-
-            /* Evento de actualizacion de datos */
-            /* Evento de actualizacion de datos - VERSIÓN CORREGIDA */
-            tarjeta.querySelector('.guardar-btn').addEventListener("click", (e) => {
-                e.preventDefault();
-
-                const datos = recogerDatosFormulario();
-                if (!datos) return;
-
-                // OPCIÓN 1: Usar FormData (recomendado)
-                const formData = new FormData();
-                formData.append("categoria", datos.categoria);
-                formData.append("titulo", datos.titulo);
-                formData.append("descripcion", datos.descripcion);
-                formData.append("precio", datos.precio.toString()); // Asegurar que sea string
-
-                console.log("Enviando datos:");
-                for (let [key, value] of formData.entries()) {
-                    console.log(key + ': ' + value);
-                }
-
-                fetch(`http://127.0.0.1:8080/CastroRetro/api/update-products?id=${producto.productId}`, {
-                    method: 'POST',
-                    body: formData,
-                    credentials: 'include'
-                })
-                    .then(response => {
-                        console.log('Response status:', response.status);
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Response data:', data);
-                        if (data.success) {
-                            mostrarExito(`Producto "${producto.title}" modificado`, 2000);
-                            
-                        } else {
-                            mostrarError(data.mensaje || 'Error al actualizar el producto');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error completo:', error);
-                        mostrarError('No se pudo modificar el producto.');
-                    });
-            });
-
-            
-
-            divProductos.appendChild(tarjeta);
-
-            function recogerDatosFormulario() {
-
-                const titulo = tarjeta.querySelector(".my-products-title")?.value.trim();
-                const descripcion = tarjeta.querySelector(".my-products-description")?.value.trim();
-                const categoria = tarjeta.querySelector(".my-products-category")?.value;
-                const precio = parseFloat(tarjeta.querySelector(".my-products-price")?.value);
-
-                // Validaciones específicas
-                if (!categoria) {
-                    mostrarError("Debe seleccionar una categoría");
-                    return null;
-                }
-
-                if (!titulo) {
-                    mostrarError("Debe ingresar un título para el producto");
-                    return null;
-                }
-
-                if (!descripcion) {
-                    mostrarError("Debe escribir una descripción del producto");
-                    return null;
-                }
-
-                if (!precio || isNaN(precio) || precio <= 0) {
-                    mostrarError("Debe ingresar un precio válido");
-                    return null;
-                }
-
-                if (!categoria || !titulo || !descripcion || isNaN(precio)) {
-                    mostrarError("Faltan datos por completar");
-                    return null;
-                }
-                console.log(categoria);
-                console.log(titulo);
-                console.log(descripcion);
-                console.log(precio);
-
-                const datos = {
-                    categoria,
-                    titulo,
-                    descripcion,
-                    precio
-                };
-                return datos;
-            }
-        });
+        }
     }
+    ventas();
+
+    function compras() {
+        fetch(`http://127.0.0.1:8080/CastroRetro/api/bought-products?userId=${userId}`, {
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                crearProductos(data);
+                animacionProductos();
+            })
+            .catch(err => {
+                console.error(err);
+                mostrarError("Ocurrió un error al recoger los productos");
+            });
+
+
+        function crearProductos(datos) {
+            const divProductos = document.querySelector("#contenido-compras");
+
+            datos.forEach((producto) => {
+                const a = document.createElement("a");
+                a.href = `./product.html?id=${producto.productId}`;
+                a.className = "product flex flex-col my-5 p-2 justify-center items-center rounded-xl";
+
+                a.innerHTML = `
+					<div class="w-full aspect-square">
+						<img class="w-full h-full object-cover rounded-xl" src="${"http://127.0.0.1:8080/CastroRetro/" + producto.images[0]}" alt="${producto.title}">
+					</div>
+					<div class="w-full p-4">
+						<div class="flex justify-between items-center">
+						<p class="text-2xl font-bold text-[#ff0000] mb-1">${producto.productPrice} €</p>
+						<p class="text-lg font-thin text-gray-400 mb-1">${producto.category}</p>
+						</div>
+						<p class="text-2xl font-bold text-[#ffb847] truncate">${producto.title}</p>
+						<p class="text-sm pt-2 text-white line-clamp-3">${producto.description}</p>
+					</div>
+					`;
+
+                divProductos.appendChild(a);
+            });
+
+        }
+
+        function animacionProductos() {
+            document.querySelectorAll('.product').forEach(product => {
+                product.addEventListener('mousemove', (e) => {
+                    const rect = product.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const rotateX = -((y / rect.height - 0.5) * 20);
+                    const rotateY = ((x / rect.width - 0.5) * 20);
+
+                    product.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                product.addEventListener('mouseleave', () => {
+                    product.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            });
+        }
+    }
+    compras();
 }

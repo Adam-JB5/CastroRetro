@@ -99,7 +99,7 @@ export default function product() {
                         console.log('Pago completado por', details.payer.name.given_name);
 
                         // Simular compra en backend
-                        return fetch("http://127.0.0.1:8080/CastroRetro/api/comprar", {
+                        return fetch("http://127.0.0.1:8080/CastroRetro/api/buy", {
                             method: "POST",
                             credentials: "include",
                             headers: {

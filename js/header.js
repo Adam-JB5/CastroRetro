@@ -1,3 +1,4 @@
+import { mostrarExito } from "./utils.js";
 
 export default function header() {
 
@@ -7,13 +8,10 @@ export default function header() {
 
     const usuario = JSON.parse(sessionStorage.getItem("usuario"));
 
-    console.log(usuario);
-    console.log(username);
-    console.log(role);
 
     username.innerText = usuario.username;
     role.innerText = usuario.isAdmin ? "Administrador" : "Usuario";
-    
+
     let imageUrl = usuario.profileImage
         ? `http://127.0.0.1:8080/CastroRetro/${usuario.profileImage}`
         : './assets/icons/profilePlaceholder.svg';
@@ -70,6 +68,31 @@ export default function header() {
         });
     }
 
+    function cerrarSesion() {
+        fetch("http://127.0.0.1:8080/CastroRetro/api/logout", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.removeItem("usuario");
+
+                    mostrarExito("Se cerró la sesión correctamente");
+
+                    setTimeout(() => {
+                        window.location.href = "./login.html";
+                    }, 1000);
+
+                }
+            })
+            .catch(error => {
+                console.error("Error al cerrar sesión:", error);
+                mostrarError("Hubo un problema al cerrar sesión. Inténtelo de nuevo.");
+            });
+    }
+
+    document.getElementById("header-logout-button").addEventListener("click", cerrarSesion);
     esAdmin();
     zoomImagenPerfil();
 }

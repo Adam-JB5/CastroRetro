@@ -23,7 +23,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
 
                 <!-- Botones -->
-                <div id="header-buttons-div" class="flex space-x-4">
+                <div id="header-buttons-div" class="flex items-center space-x-4">
                     <a href="./home.html"
                         class="bg-[#2f2f88] hover:bg-[#282875] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         INICIO
@@ -40,7 +40,14 @@
                         class="bg-[#ffb8de] hover:bg-[#d27baa] transition-colors px-4 py-1.5 font-medium rounded-sm">
                         MIS PRODUCTOS
                     </a>
+
                 </div>
+
+                <!-- Boton cerrar sesion -->
+                <a id="header-logout-button"
+                    class="hover:bg-[#ff0000] border-2 border-red-600 ml-auto transition-colors px-4 py-1.5 font-medium rounded-sm">
+                    CERRAR SESIÓN
+                </a>
 
                 <!-- Info. usuario -->
                 <div class="flex items-center space-x-3">
@@ -91,7 +98,8 @@
 
                     <!-- Grupo: Confirmar contraseña -->
                     <div class="w-full flex flex-col items-center gap-2">
-                        <label for="profile-password" class="w-3/4 text-left text-white text-xl">REPITE TU CONTRASEÑA</label>
+                        <label for="profile-password" class="w-3/4 text-left text-white text-xl">REPITE TU
+                            CONTRASEÑA</label>
                         <input id="profile-confirm-password" type="password"
                             class="w-3/4 h-14 text-white bg-black bg-opacity-80 focus:bg-opacity-100 text-2xl rounded-lg px-4"
                             placeholder="Contraseña" />

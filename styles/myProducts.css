@@ -26,6 +26,16 @@ input[type="text"], textarea, input[type="number"], button {
     font-family: "Montserrat";
 }
 
+.product {
+	transition: all 0.3 ease;
+	transform-style: preserve-3d;
+	perspective: 1000px;
+}
+
+.product:hover {
+	box-shadow: 0 12px 30px #12132a;
+}
+
 .tab-content {
     display: none; 
 }
