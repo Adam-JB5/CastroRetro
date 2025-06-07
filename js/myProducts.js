@@ -90,7 +90,7 @@ export default function myProducts() {
                 tarjeta.style.backgroundColor = `${estadoHTML.color}`;
 
                 const imagenes = producto.images.map(url => `
-            <img src="http://127.0.0.1:8080/CastroRetro/${url}" alt="imagen" class="w-full h-32 object-cover rounded-md">`).join('');
+                    <img src="http://127.0.0.1:8080/CastroRetro/${url}" alt="imagen" class="w-full h-32 object-cover rounded-md">`).join('');
 
 
                 tarjeta.innerHTML = `

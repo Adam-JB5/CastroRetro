@@ -1,4 +1,4 @@
-import { mostrarExito } from "./utils.js";
+import { mostrarError, mostrarExito } from "./utils.js";
 
 export default function header() {
 
@@ -92,7 +92,25 @@ export default function header() {
             });
     }
 
+    function busqueda() {
+    const form = document.getElementById("header-search-form");
+    const input = document.getElementById("header-search-input");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const termino = input.value.trim();
+
+        if (termino !== "" && termino !== null) {
+            window.location.href = `./busqueda.html?busqueda=${encodeURIComponent(termino)}`;
+        } else {
+            mostrarError("No se ha introducido ningún término");
+        }
+    });
+}
+
     document.getElementById("header-logout-button").addEventListener("click", cerrarSesion);
+    busqueda();
     esAdmin();
     zoomImagenPerfil();
 }

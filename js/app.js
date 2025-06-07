@@ -10,6 +10,7 @@ import admin from "./admin.js";
 import product from "./product.js";
 import category from "./category.js";
 import myProducts from "./myProducts.js";
+import search from "./search.js";
 
 if (window.location.pathname.endsWith("/register.html")) {
     document.addEventListener("DOMContentLoaded", () => {
@@ -30,7 +31,8 @@ const rutasProtegidas = [
     "/product.html",
     "/admin.html",
     "/category.html",
-    "/my-products.html"
+    "/my-products.html",
+    "/busqueda.html"
 ];
 
 if (rutasProtegidas.some(ruta => window.location.pathname.endsWith(ruta))) {
@@ -61,6 +63,10 @@ if (window.location.pathname.endsWith("/my-products.html")) {
 
 if (window.location.pathname.endsWith("/category.html")) {
     category();
+}
+
+if (window.location.pathname.endsWith("/busqueda.html")) {
+    search();
 }
 
 if (window.location.pathname.endsWith("/admin.html")) {

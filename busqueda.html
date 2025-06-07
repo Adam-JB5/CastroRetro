@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda</title>
 
     <!-- Iconos -->
     <link rel="icon" href="./assets/icons/favicon.ico" sizes="any">
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="icon" href="./assets/icons/favicon.png" type="image/png">
 
-    <title>Subir producto</title>
-    <link rel="stylesheet" href="./styles/myProducts.css">
+
+    <link rel="stylesheet" href="./styles/category.css">
     <link rel="stylesheet" href="./styles/output.css">
     <script type="module" src="./js/app.js" defer></script>
+
+
 </head>
 
-<body class="bg-[#1b1d36]">
+<body class="h-screen flex flex-col bg-[#1b1d36]">
     <header class="w-full bg-[#1e1e4a] text-white">
         <div class="container mx-auto px-4 pb-4 pt-2">
 
@@ -72,35 +75,13 @@
         </div>
     </header>
 
-    <!-- Contenido principal con pestañas -->
-    <main class="flex-1 h-full w-full p-6 bg-[#1b1d36] text-white">
-        <div class="container mx-auto">
-            <div class="flex justify-around gap-4 mb-6">
-                <button id="tab-comprados" class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS
-                    COMPRADOS</button>
-                <button id="tab-vendidos" class="px-6 py-3 text-3xl rounded transition-colors tab-button">PRODUCTOS
-                    VENDIDOS</button>
-            </div>
+    <main class="flex flex-col items-center justify-center bg-[#1b1d36] space-y-12 p-8">
 
-            <div class="tab-content" id="my-products-comprados">
-                <h2 class="text-3xl text-white">TUS PRODUCTOS COMPRADOS</h2>
-                <div id="contenido-compras" class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
-
-                </div>
-            </div>
-
-            <div class="tab-content" id="my-products-vendidos">
-                <div class="flex items-center mb-3">
-                    <h2 class="text-3xl text-white mr-2">TUS PRODUCTOS EN VENTA/VENDIDOS</h2>
-                    <p class="text-sm text-gray-500">Ten en cuenta que tendrás que esperar a que se vuelva a aprobar tu
-                        producto en
-                        caso de cambios</p>
-                </div>
-                <div id="contenido-ventas">
-
-                </div>
-            </div>
+        <h1 id="search-title" class="text-white text-7xl">PRODUCTOS</h1>
+        <div id="search-div-productos"
+            class="w-11/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-white text-xl font-semibold">
         </div>
+
     </main>
 </body>
 
