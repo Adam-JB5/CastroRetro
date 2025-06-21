@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class detectConsole extends HttpServlet {
 
     private static final String NYCKEL_API_URL = "https://www.nyckel.com/v1/functions/gaming-console-model/invoke";
-    private static final String BEARER_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6ImF0K2p3dCJ9.eyJpc3MiOiJodHRwczovL3d3dy5ueWNrZWwuY29tIiwibmJmIjoxNzQ4NjIwNDkwLCJpYXQiOjE3NDg2MjA0OTAsImV4cCI6MTc0ODYyNDA5MCwic2NvcGUiOlsiYXBpIl0sImNsaWVudF9pZCI6InJ1MTF2Y3FzMHY4cGR0MGFnczl0NWd5OThmcDFudzA5IiwianRpIjoiRUI4QjY5RkVCQTRFMjUwMTA1MTgyQjQ0MDlGQzExQjIifQ.gCTrCpPcDDBj86lpKyRm6fHLFBCSq4pJjkN2GFJ6tK_1t-HOTM5JImJkWo7q6sr3tNXmAgwcy8ro7ZF8qs1DBgT30Aeec4yPJl8vo7QAplgfaEmibiKVs7kbN4viTNux3_OA3JRLO0u_2j9BamwN-9RO-BthBTDlfCDGMEvnSOV-_mTHebNnpo6VdWwySZmukS-pDk2UWXNZU1EaqdLqDDr8mO7_1ijo48YpH8I1SZS2RGQpr8gF_JSzpBLisMzWQmJ3AL0z1eyO4rlFuo2DUoUlKqJowO-JtKjFADGvuzo0JuK9V-yYLeVzls1x9PL8dWMljFPfD-0fmqh0Ag7eDQ"; // Póngalo como variable de entorno para mayor seguridad
+    private static final String BEARER_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCI6ImF0K2p3dCJ9.eyJpc3MiOiJodHRwczovL3d3dy5ueWNrZWwuY29tIiwibmJmIjoxNzUwMDc5NzQ0LCJpYXQiOjE3NTAwNzk3NDQsImV4cCI6MTc1MDA4MzM0NCwic2NvcGUiOlsiYXBpIl0sImNsaWVudF9pZCI6InJ1MTF2Y3FzMHY4cGR0MGFnczl0NWd5OThmcDFudzA5IiwianRpIjoiODcwQUJEQUM0OTAzMTBCRDM0MDVBQTdEMzA2QTM0OEUifQ.mqGvlg9Gffsn5MRyY3vayZdA6rNfhK1LhpiXobk7Wa71OcTlI-kjKzGDXgydD_6FPA4STXxNqulgQkbOLYvRUSbgaXYgbQBWLkwyJhvNWC3_nP-olqlqfqlgPrKvLrJeznrX6AJx3FQAi6-p3VX5B4wBNt8fKLdcAus2s_1Vf4xZjsalcHruGZrfQ2Pw396Jd37dPo6kUldxn6BUTKBq6-4TMuxaJP9aKrd2t6-1tsp_CI8VpZLmIFTI-iw6tDRLCn90og0jTgUai_H4jUSOsIpkUZ3kLoDlQzX6jtV7hJQuunT-JX3lHncKqjBGMkcksVx4wlrLmigc--PTXK4V5A";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class detectConsole extends HttpServlet {
             JsonObject inputJson = new Gson().fromJson(reader, JsonObject.class);
             String imagenBase64 = inputJson.get("imagen").getAsString();
 
-            // Preparar JSON para Nyckel
+            // Preparar JSON para la API
             JsonObject nyckelRequest = new JsonObject();
             nyckelRequest.addProperty("data", imagenBase64);
             String jsonBody = nyckelRequest.toString();
