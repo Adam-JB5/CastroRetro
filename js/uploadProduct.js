@@ -44,7 +44,7 @@ export default function uploadProduct() {
 
                         const consola = data.labelName;
 
-                        mostrarExito("Se ha detectado: " + consola + ". Por favor comprueba los campos autocompletados.", 6000);
+                        let errorMapa = true;
 
                         let inputNombre = document.getElementById("upload-product-titulo");
                         let inputDescripcion = document.getElementById("upload-product-descripcion");
@@ -63,9 +63,15 @@ export default function uploadProduct() {
                                 inputPrecio.value = consolasMap[`${consola}`].precio;
                             }
                         } catch (error) {
-                            mostrarError("Ocurrió un error: " + error);
+                            mostrarError("Ocurrió un error. Vuelva a intentarlo");
+                            console.error(error);
+                            errorMapa = false;
                         }
 
+                        /* Si no ocurre ningun error de recogida de datos del mapa se muestra exito */
+                        if (errorMapa) {
+                            mostrarExito("Se ha detectado: " + consola + ". Por favor comprueba los campos autocompletados.", 6000);
+                        }
 
                     })
                     .catch(error => {
@@ -259,7 +265,7 @@ export default function uploadProduct() {
                 const response = await fetch("http://127.0.0.1:8080/CastroRetro/api/upload-product", {
                     method: "POST",
                     body: formData,
-                    credentials: "include", // si usas cookies de sesión
+                    credentials: "include",
                 });
 
                 const data = await response.json();

@@ -18,7 +18,6 @@ export function mostrarError(mensaje) {
     }, 5000);
 }
 
-
 export function mostrarExito(mensaje, tiempo) {
     let successDiv = document.getElementById("register-success");
     if (!successDiv) {
@@ -115,6 +114,11 @@ export const consolasMap = {
     nombre: "Nintendo - 64",
     descripcion: "Primera consola 3D de Nintendo con juegos icónicos.",
     precio: 150
+  },
+  "Nintendo Classic Mini": {
+    nombre: "Nintendo NES",
+    descripcion: "Primera consola de sobremesa de Nintendo que usa cartuchos.",
+    precio: 110
   },
   "Nintendo Ds": {
     nombre: "Nintendo - DS",

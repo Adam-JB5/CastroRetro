@@ -32,7 +32,7 @@ export default function product() {
         main.innerHTML = `
         <div class="flex flex-col h-full items-center justify-center bg-[#1b1d36] text-white py-12 px-4 space-y-10">
 
-            <h1 class="text-7xl text-white">${producto.title.toUpperCase()}</h1>
+            <h1 class="text-5xl text-white">${producto.title.toUpperCase()}</h1>
 
             <div class="w-full h-full max-w-6xl flex flex-col lg:flex-row gap-12">
 
@@ -96,9 +96,9 @@ export default function product() {
                 },
                 onApprove: function (data, actions) {
                     return actions.order.capture().then(function (details) {
+                        
                         console.log('Pago completado por', details.payer.name.given_name);
 
-                        // Simular compra en backend
                         return fetch("http://127.0.0.1:8080/CastroRetro/api/buy", {
                             method: "POST",
                             credentials: "include",
